@@ -1,0 +1,25 @@
+# Exact versions used to produce the results reported in the paper.
+# Python 3.11.13, CUDA 12.8.
+#
+# The torch build is CUDA-specific. Install it from the PyTorch index first if
+# your CUDA version differs:
+#   pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cu128
+
+torch==2.11.0+cu128
+transformers==5.16.1
+tokenizers==0.23.2
+safetensors==0.8.0
+accelerate==1.14.0
+huggingface_hub==1.30.0
+datasets==5.0.1
+
+numpy==2.4.6
+scipy==1.17.1
+scikit-learn==1.9.0
+pandas==3.0.5
+
+matplotlib==3.11.1
+bitsandbytes   # required by the default 4-bit path of the sc2_* scripts
+einops==0.8.2
+tqdm==4.70.0
+python-dotenv

@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "Suicidality detection in large language models depends on a four-dimensional semantic subspace"
+abstract: >-
+  Analysis code and per-claim result files for a causal, cross-model account of
+  how large language models detect suicidal content.
+type: software
+authors:
+  - given-names: Nafiz
+    family-names: Ahmed
+    affiliation: "INQUIRE Lab, School of Electrical and Computer Engineering, University of Oklahoma"
+    orcid: "https://orcid.org/0009-0004-6100-1995"
+  - given-names: Sarah S.
+    family-names: Sharif
+    affiliation: "INQUIRE Lab, School of Electrical and Computer Engineering, University of Oklahoma"
+    orcid: "https://orcid.org/0000-0002-4667-6650"
+  - given-names: Dingjing
+    family-names: Shi
+    affiliation: "School of Psychology, Georgia Institute of Technology"
+    orcid: "https://orcid.org/0000-0002-5652-3818"
+  - given-names: Yaser M.
+    family-names: Banad
+    affiliation: "INQUIRE Lab, School of Electrical and Computer Engineering, University of Oklahoma"
+    orcid: "https://orcid.org/0000-0001-7339-810X"
+    email: bana@ou.edu
+keywords:
+  - mechanistic interpretability
+  - large language models
+  - causal attribution
+  - model auditing
+license-url: "https://github.com/INQUIRELAB/mech-interp-on-suicide/blob/main/LICENSE"
+# Fill in once the paper is accepted and the repository is archived:
+# version: 1.0.0
+# doi: 10.5281/zenodo.XXXXXXX
+# date-released: YYYY-MM-DD

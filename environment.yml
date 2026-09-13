@@ -1,0 +1,31 @@
+# Conda environment for the code release of
+# "Suicidality detection in large language models depends on a four-dimensional
+#  semantic subspace" (Ahmed, Sharif, Shi & Banad).
+#
+#   conda env create -f environment.yml
+#   conda activate mech-interp-suicide
+#   python verify_setup.py
+#
+# Package versions are not duplicated here: this file installs requirements.txt
+# through pip, so that file stays the single source of truth for both the conda
+# and the plain-venv install paths.
+#
+# The torch wheel is CUDA-specific. The --extra-index-url below fetches the
+# cu128 build used to produce the reported results. For a different CUDA
+# version, a CPU-only install, or an environment without conda, see INSTALL.md.
+
+name: mech-interp-suicide
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.11.13
+  - pip>=24.0
+
+  # Build tooling some wheels need on a clean machine.
+  - git
+
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - -r requirements.txt
