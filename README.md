@@ -1,6 +1,6 @@
 # Suicidality detection in large language models depends on a four-dimensional semantic subspace
 
-[![License: INQUIRE Academic](https://img.shields.io/badge/License-INQUIRE%20Academic-red.svg)](LICENSE)
+[![License: Noncommercial](https://img.shields.io/badge/License-Noncommercial-blue.svg)](LICENSE)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](INSTALL.md)
 
 **Authors:**  
@@ -308,12 +308,9 @@ If you or someone you know is in distress, the 988 Suicide and Crisis Lifeline (
 <a id="license"></a>
 ## 📝 License
 
-INQUIRE Lab Academic Research License (Version 1.0) — see [LICENSE](LICENSE).
+PolyForm Noncommercial License 1.0.0 for code and CC BY-NC 4.0 for research materials — see [LICENSE](LICENSE).
 
-Use is limited to non-commercial academic research, peer review, and verification of the
-results reported in the associated publication. Redistribution, derivative works, and any
-commercial use require prior written permission from the INQUIRE Lab. Any publication
-describing results obtained with this software must cite the paper below.
+Noncommercial use, modification, and redistribution are permitted under the applicable license terms. Please cite the paper below when reporting results obtained with this software.
 
 <a id="citation"></a>
 ## 📚 Citation
@@ -327,3 +324,7 @@ describing results obtained with this software must cite the paper below.
 ```
 
 Machine-readable metadata is in [CITATION.cff](CITATION.cff).
+
+## License scope
+
+Original INQUIRE Lab code is licensed under PolyForm Noncommercial License 1.0.0. Original INQUIRE Lab datasets, figures, and documentation are licensed under CC BY-NC 4.0. See [LICENSE](LICENSE) for scope and the full license texts. Materials from other rights holders retain their original terms.
