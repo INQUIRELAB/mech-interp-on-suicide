@@ -75,6 +75,8 @@ device = "cuda"
 def parse_args():
     p = argparse.ArgumentParser(description="Edge attribution patching (EAP) on binary 232K")
     p.add_argument("--n", type=int, default=30, help="clean/corrupt pairs (default 30)")
+    p.add_argument("--offset", type=int, default=0,
+                   help="skip this many posts per class in the seeded shuffle; 300 = held out from direction fitting (0-99) and testing (100-299)")
     p.add_argument("--maxlen", type=int, default=MAXLEN)
     p.add_argument("--verify-topk", type=int, default=12,
                    help="exact path-patch this many top edges (0 = skip verification)")
@@ -101,7 +103,7 @@ def main():
     sui = [t for t, l in zip(texts, labels) if l == "suicide" and t and len(t) > 80]
     non = [t for t, l in zip(texts, labels) if l == "non-suicide" and t and len(t) > 80]
     rng.shuffle(sui); rng.shuffle(non)
-    sui, non = sui[: args.n], non[: args.n]
+    sui, non = sui[args.offset: args.offset + args.n], non[args.offset: args.offset + args.n]
 
     loader = ModelLoader(device=device)
     model, tok = loader.load_llama(load_in_4bit=True, auto_quantize=False)

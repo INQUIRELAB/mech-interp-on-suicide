@@ -222,6 +222,29 @@ file. Paths are relative to the repository root. Run from the repository root.
 | Seed sweep (variance across seeds) | `SEEDS=0,1,2,3,4 python analysis/sanity/seed_sweep.py` | `results/sc2_binary/seed_sweep.json` |
 | Worked input/output examples | `python analysis/sanity/dump_examples.py` | `results/sc2_binary/examples.json` |
 
+### Revision experiments
+
+All in fp16 on the pinned `meta-llama/Llama-3.1-8B-Instruct` commit `0e9e39f2`.
+
+| Path | Produces |
+| --- | --- |
+| `colab/revision_experiments.ipynb` | Model provenance, truncation counts, monitor CI, corpus-overlap audit, truncation-free ablation, per-head knockout, joint head patching, layer-wise patching, transfer (section 12) and transfer without duplicates (section 12b) |
+| `colab/revision_controls.ipynb` | Mean-ablation, off-task controls (SST-2, AG News) and the head-to-direction analysis behind main-text Fig. 4 |
+| `colab/rev_dedup_run.py` | Sections 0, 1, 7, 12 and 12b of `revision_experiments.ipynb` as one script, for running outside Colab |
+| `analysis/sanity/sc2_liu_headtohead_v2.py` | The fp16 head-patching rerun whose outputs the notebooks read |
+| `analysis/sanity/sc2_edge_attribution_patching.py --offset 300` | Edge attribution on pairs held out from direction fitting (posts 0-99) and testing (100-299); the default `--offset 0` is unchanged |
+
+To run outside Colab:
+
+```bash
+REV_BASE=<dir holding colab_data_bundle.zip> HF_TOKEN=<token> python colab/rev_dedup_run.py
+```
+
+On multi-GPU machines set `CUDA_DEVICE_ORDER=PCI_BUS_ID` together with `CUDA_VISIBLE_DEVICES`;
+otherwise CUDA numbers GPUs differently from `nvidia-smi`. The fp16 SAE and DLA figures come
+from `sc2_sae.py` and `sc2_direct_logit_attribution.py` run with `MI_PRECISION=fp16`. The data
+bundle is not included because it contains corpus text that must not be redistributed.
+
 ### Figures
 
 ```bash
@@ -275,6 +298,7 @@ analysis/
     rerun_all_sc2.py sequential driver for the full binary-task suite
     run_all_sanity.py driver for the SC-1..SC-4 sanity checks
   phase11_severity_axis.py  severity-axis analysis
+colab/               revision experiments (notebooks and a standalone runner)
 src/
   repro.py           centralized seeding; single source of truth for SEED
   models.py          model loading and precision handling
