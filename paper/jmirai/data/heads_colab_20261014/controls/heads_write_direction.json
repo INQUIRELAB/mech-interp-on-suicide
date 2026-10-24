@@ -1,0 +1,160 @@
+{
+  "knockout": {
+    "zero": {
+      "baseline_proj_auc": 0.9731,
+      "baseline_proj_gap": 2.2757621950423346,
+      "by_k": {
+        "5": {
+          "proj_auc_top": 0.9582,
+          "proj_auc_drop_ci95": [
+            0.0038974999999999067,
+            0.028910000000000026
+          ],
+          "proj_gap_top": 1.203130699917674,
+          "proj_gap_frac_remaining": 0.5286715380625667,
+          "proj_auc_rand_mean": 0.9712099999999999,
+          "proj_gap_rand_frac": 0.9779696150383467
+        },
+        "10": {
+          "proj_auc_top": 0.9359,
+          "proj_auc_drop_ci95": [
+            0.018399999999999972,
+            0.059902499999999956
+          ],
+          "proj_gap_top": 0.8116293647885322,
+          "proj_gap_frac_remaining": 0.35664067474037375,
+          "proj_auc_rand_mean": 0.9705,
+          "proj_gap_rand_frac": 0.9172264679272324
+        },
+        "20": {
+          "proj_auc_top": 0.8453,
+          "proj_auc_drop_ci95": [
+            0.08839749999999992,
+            0.17654499999999995
+          ],
+          "proj_gap_top": 0.3774391776323318,
+          "proj_gap_frac_remaining": 0.16585176537977886,
+          "proj_auc_rand_mean": 0.9712799999999999,
+          "proj_gap_rand_frac": 0.8700462790834527
+        },
+        "40": {
+          "proj_auc_top": 0.7892,
+          "proj_auc_drop_ci95": [
+            0.13047750000000005,
+            0.24280000000000002
+          ],
+          "proj_gap_top": 0.12788394778966905,
+          "proj_gap_frac_remaining": 0.056193897617360725,
+          "proj_auc_rand_mean": 0.96814,
+          "proj_gap_rand_frac": 0.6033772803394444
+        }
+      }
+    },
+    "mean": {
+      "baseline_proj_auc": 0.9731,
+      "baseline_proj_gap": 2.2757621950423346,
+      "by_k": {
+        "5": {
+          "proj_auc_top": 0.9528,
+          "proj_auc_drop_ci95": [
+            0.006697500000000037,
+            0.03599999999999992
+          ],
+          "proj_gap_top": 1.1573166055977344,
+          "proj_gap_frac_remaining": 0.5085402192368371,
+          "proj_auc_rand_mean": 0.9719099999999999,
+          "proj_gap_rand_frac": 1.0040033415285403
+        },
+        "10": {
+          "proj_auc_top": 0.9267,
+          "proj_auc_drop_ci95": [
+            0.025097500000000012,
+            0.07210500000000004
+          ],
+          "proj_gap_top": 0.7954394096136093,
+          "proj_gap_frac_remaining": 0.3495265943631743,
+          "proj_auc_rand_mean": 0.9713799999999999,
+          "proj_gap_rand_frac": 0.9271587039482435
+        },
+        "20": {
+          "proj_auc_top": 0.8485,
+          "proj_auc_drop_ci95": [
+            0.08599499999999996,
+            0.17372999999999994
+          ],
+          "proj_gap_top": 0.4766638559103012,
+          "proj_gap_frac_remaining": 0.20945240102357623,
+          "proj_auc_rand_mean": 0.9721399999999999,
+          "proj_gap_rand_frac": 0.9373295131796378
+        },
+        "40": {
+          "proj_auc_top": 0.8051,
+          "proj_auc_drop_ci95": [
+            0.11599749999999999,
+            0.22461250000000002
+          ],
+          "proj_gap_top": 0.24777754604816443,
+          "proj_gap_frac_remaining": 0.10887672999750977,
+          "proj_auc_rand_mean": 0.9705499999999999,
+          "proj_gap_rand_frac": 0.746047004983901
+        }
+      }
+    }
+  },
+  "patching": {
+    "5": {
+      "ld_ie_top": 0.8414616713921229,
+      "proj_ie_top": 0.7189589599768321,
+      "proj_ie_top_ci95": [
+        0.6966923057784636,
+        0.7436719526598851
+      ],
+      "median_proj_ie_top": 0.7118650376796722,
+      "proj_ie_rand_mean": -0.060988398536980334,
+      "ld_ie_rand_mean": -0.08369825727995096
+    },
+    "10": {
+      "ld_ie_top": 0.9428561707337697,
+      "proj_ie_top": 0.8804255922635397,
+      "proj_ie_top_ci95": [
+        0.8642610507955153,
+        0.898117443844676
+      ],
+      "median_proj_ie_top": 0.8815780580043793,
+      "proj_ie_rand_mean": -0.04154810864153357,
+      "ld_ie_rand_mean": -0.06086383996196673
+    },
+    "20": {
+      "ld_ie_top": 0.9785130461057027,
+      "proj_ie_top": 0.9437120974063873,
+      "proj_ie_top_ci95": [
+        0.928918520261844,
+        0.9588775556534529
+      ],
+      "median_proj_ie_top": 0.9483014643192291,
+      "proj_ie_rand_mean": -0.18148507792750024,
+      "ld_ie_rand_mean": -0.23657391761279237
+    },
+    "40": {
+      "ld_ie_top": 0.9957413276036581,
+      "proj_ie_top": 0.975120555361112,
+      "proj_ie_top_ci95": [
+        0.9583781491716702,
+        0.9879765615363916
+      ],
+      "median_proj_ie_top": 0.9783658385276794,
+      "proj_ie_rand_mean": -0.25795899958686885,
+      "ld_ie_rand_mean": -0.32535832099587425
+    }
+  },
+  "env": {
+    "seed": 0,
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision_requested": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "revision_resolved": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "precision": "fp16",
+    "transformers": "4.56.2",
+    "torch": "2.11.0+cu130",
+    "gpu": "NVIDIA A100-SXM4-80GB"
+  }
+}

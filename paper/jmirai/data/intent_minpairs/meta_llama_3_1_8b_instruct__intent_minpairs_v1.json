@@ -1,0 +1,1193 @@
+{
+ "model": "unsloth/Meta-Llama-3.1-8B-Instruct",
+ "config": {
+  "model": "unsloth/Meta-Llama-3.1-8B-Instruct",
+  "dtype": "float16",
+  "batch": 8,
+  "n_dir": 500,
+  "n_val": 300,
+  "seed": 0,
+  "data": "/mnt/nas/MI on suicide-Nafiz Ahmed(revision)/data/intent_minpairs/intent_minpairs_v1.jsonl",
+  "out_dir": "/mnt/nas/MI on suicide-Nafiz Ahmed(revision)/results/intent_minpairs",
+  "smoke": false
+ },
+ "direction": {
+  "n_dir_per_class": 500,
+  "n_val_per_class": 300,
+  "n_tfidf_per_class": 2000,
+  "seed": 0,
+  "site": 22,
+  "val_auc_by_layer": [
+   NaN,
+   0.7890333333333333,
+   0.7893,
+   0.7800666666666666,
+   0.7797000000000002,
+   0.7853,
+   0.7938333333333334,
+   0.7960111111111112,
+   0.7949666666666667,
+   0.8011666666666668,
+   0.8089444444444445,
+   0.8464888888888888,
+   0.8630444444444445,
+   0.9350444444444446,
+   0.9519444444444445,
+   0.9537888888888888,
+   0.9581444444444445,
+   0.9590888888888889,
+   0.9598222222222221,
+   0.9598277777777777,
+   0.9596555555555556,
+   0.9595222222222223,
+   0.9599666666666666,
+   0.9594444444444443,
+   0.9592666666666667,
+   0.9598444444444444,
+   0.9596666666666667,
+   0.9592888888888889,
+   0.9588444444444444,
+   0.9591333333333334,
+   0.9592888888888889,
+   0.9591,
+   0.9585777777777779
+  ]
+ },
+ "n_items": 64,
+ "per_condition": {
+  "counterfactual": {
+   "n_control": 16,
+   "behav_base": {
+    "auc": 1.0,
+    "auc_ci95": [
+     1.0,
+     1.0
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 3.0517578125e-05
+   },
+   "behav_clinical": {
+    "auc": 1.0,
+    "auc_ci95": [
+     1.0,
+     1.0
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 3.0517578125e-05
+   },
+   "proj_site": {
+    "auc": 1.0,
+    "auc_ci95": [
+     1.0,
+     1.0
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 3.0517578125e-05
+   },
+   "tfidf232": {
+    "auc": 0.56640625,
+    "auc_ci95": [
+     0.359375,
+     0.76953125
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 0.6875,
+    "sign_test_p": 0.210113525390625
+   },
+   "lexicon": {
+    "auc": 0.40625,
+    "auc_ci95": [
+     0.3125,
+     0.5
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 0.40625,
+    "sign_test_p": 0.25
+   },
+   "proj_auc_by_layer": [
+    NaN,
+    0.39453125,
+    0.375,
+    0.38671875,
+    0.33203125,
+    0.27734375,
+    0.38671875,
+    0.390625,
+    0.4140625,
+    0.4296875,
+    0.4609375,
+    0.8359375,
+    0.90234375,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "third_person": {
+   "n_control": 16,
+   "behav_base": {
+    "auc": 0.9921875,
+    "auc_ci95": [
+     0.96484375,
+     1.0
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 0.9375,
+    "sign_test_p": 0.000518798828125
+   },
+   "behav_clinical": {
+    "auc": 0.89453125,
+    "auc_ci95": [
+     0.765625,
+     0.984375
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 3.0517578125e-05
+   },
+   "proj_site": {
+    "auc": 0.9921875,
+    "auc_ci95": [
+     0.96484375,
+     1.0
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 0.9375,
+    "sign_test_p": 0.000518798828125
+   },
+   "tfidf232": {
+    "auc": 0.890625,
+    "auc_ci95": [
+     0.73818359375,
+     1.0
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 3.0517578125e-05
+   },
+   "lexicon": {
+    "auc": 0.5,
+    "auc_ci95": [
+     0.5,
+     0.5
+    ],
+    "n_pairs": 16,
+    "paired_win_rate": 0.5,
+    "sign_test_p": null
+   },
+   "proj_auc_by_layer": [
+    NaN,
+    0.47265625,
+    0.51953125,
+    0.55859375,
+    0.484375,
+    0.29296875,
+    0.453125,
+    0.484375,
+    0.49609375,
+    0.43359375,
+    0.45703125,
+    0.91796875,
+    0.94140625,
+    0.9921875,
+    1.0,
+    1.0,
+    1.0,
+    0.99609375,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    0.9921875,
+    1.0
+   ]
+  },
+  "topical": {
+   "n_control": 8,
+   "behav_base": {
+    "auc": 1.0,
+    "auc_ci95": [
+     1.0,
+     1.0
+    ],
+    "n_pairs": 8,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.0078125
+   },
+   "behav_clinical": {
+    "auc": 1.0,
+    "auc_ci95": [
+     1.0,
+     1.0
+    ],
+    "n_pairs": 8,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.0078125
+   },
+   "proj_site": {
+    "auc": 1.0,
+    "auc_ci95": [
+     1.0,
+     1.0
+    ],
+    "n_pairs": 8,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.0078125
+   },
+   "tfidf232": {
+    "auc": 0.7734375,
+    "auc_ci95": [
+     0.515625,
+     0.9765625
+    ],
+    "n_pairs": 8,
+    "paired_win_rate": 0.75,
+    "sign_test_p": 0.2890625
+   },
+   "lexicon": {
+    "auc": 0.0625,
+    "auc_ci95": [
+     0.0,
+     0.1875
+    ],
+    "n_pairs": 8,
+    "paired_win_rate": 0.0625,
+    "sign_test_p": 0.015625
+   },
+   "proj_auc_by_layer": [
+    NaN,
+    0.890625,
+    0.8046875,
+    0.828125,
+    0.90625,
+    0.8359375,
+    0.984375,
+    0.9453125,
+    0.9140625,
+    0.859375,
+    0.9453125,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "fiction": {
+   "n_control": 4,
+   "behav_base": {
+    "auc": 0.984375,
+    "auc_ci95": [
+     0.90625,
+     1.0
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.125
+   },
+   "behav_clinical": {
+    "auc": 0.96875,
+    "auc_ci95": [
+     0.875,
+     1.0
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.125
+   },
+   "proj_site": {
+    "auc": 1.0,
+    "auc_ci95": [
+     1.0,
+     1.0
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.125
+   },
+   "tfidf232": {
+    "auc": 0.984375,
+    "auc_ci95": [
+     0.90625,
+     1.0
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.125
+   },
+   "lexicon": {
+    "auc": 0.5,
+    "auc_ci95": [
+     0.5,
+     0.5
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 0.5,
+    "sign_test_p": null
+   },
+   "proj_auc_by_layer": [
+    NaN,
+    0.875,
+    0.890625,
+    0.90625,
+    0.859375,
+    0.390625,
+    0.5625,
+    0.671875,
+    0.859375,
+    0.890625,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "recovery_past": {
+   "n_control": 4,
+   "behav_base": {
+    "auc": 1.0,
+    "auc_ci95": [
+     1.0,
+     1.0
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.125
+   },
+   "behav_clinical": {
+    "auc": 0.921875,
+    "auc_ci95": [
+     0.765625,
+     1.0
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.125
+   },
+   "proj_site": {
+    "auc": 1.0,
+    "auc_ci95": [
+     1.0,
+     1.0
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.125
+   },
+   "tfidf232": {
+    "auc": 0.9375,
+    "auc_ci95": [
+     0.8125,
+     1.0
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 0.125
+   },
+   "lexicon": {
+    "auc": 0.5,
+    "auc_ci95": [
+     0.5,
+     0.5
+    ],
+    "n_pairs": 4,
+    "paired_win_rate": 0.5,
+    "sign_test_p": null
+   },
+   "proj_auc_by_layer": [
+    NaN,
+    0.125,
+    0.09375,
+    0.125,
+    0.078125,
+    0.09375,
+    0.25,
+    0.234375,
+    0.359375,
+    0.328125,
+    0.359375,
+    0.921875,
+    0.90625,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.984375,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "ALL_controls": {
+   "n_control": 48,
+   "behav_base": {
+    "auc": 0.99609375,
+    "auc_ci95": [
+     0.9843098958333333,
+     1.0
+    ],
+    "n_pairs": 48,
+    "paired_win_rate": 0.9791666666666666,
+    "sign_test_p": 3.481659405224491e-13
+   },
+   "behav_clinical": {
+    "auc": 0.9557291666666665,
+    "auc_ci95": [
+     0.8997395833333334,
+     0.9934895833333334
+    ],
+    "n_pairs": 48,
+    "paired_win_rate": 1.0,
+    "sign_test_p": 7.105427357601002e-15
+   },
+   "proj_site": {
+    "auc": 0.9973958333333334,
+    "auc_ci95": [
+     0.98828125,
+     1.0
+    ],
+    "n_pairs": 48,
+    "paired_win_rate": 0.9791666666666666,
+    "sign_test_p": 3.481659405224491e-13
+   },
+   "tfidf232": {
+    "auc": 0.7747395833333333,
+    "auc_ci95": [
+     0.6471028645833334,
+     0.88671875
+    ],
+    "n_pairs": 48,
+    "paired_win_rate": 0.8541666666666666,
+    "sign_test_p": 6.240408438884516e-07
+   },
+   "lexicon": {
+    "auc": 0.3958333333333333,
+    "auc_ci95": [
+     0.33333333333333337,
+     0.4479166666666667
+    ],
+    "n_pairs": 48,
+    "paired_win_rate": 0.3958333333333333,
+    "sign_test_p": 0.001953125
+   },
+   "proj_auc_by_layer": [
+    NaN,
+    0.5208333333333333,
+    0.5143229166666667,
+    0.5390625,
+    0.5013020833333333,
+    0.36979166666666663,
+    0.51171875,
+    0.5247395833333333,
+    0.5572916666666666,
+    0.5325520833333333,
+    0.5768229166666666,
+    0.9114583333333334,
+    0.9401041666666666,
+    0.9973958333333333,
+    1.0,
+    1.0,
+    1.0,
+    0.9986979166666666,
+    0.99609375,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    0.9973958333333334,
+    1.0
+   ]
+  }
+ },
+ "yes_rate": {
+  "genuine_intent": {
+   "base": 1.0,
+   "clinical": 1.0
+  },
+  "counterfactual": {
+   "base": 0.9375,
+   "clinical": 0.3125
+  },
+  "third_person": {
+   "base": 1.0,
+   "clinical": 1.0
+  },
+  "topical": {
+   "base": 0.875,
+   "clinical": 0.875
+  },
+  "fiction": {
+   "base": 1.0,
+   "clinical": 1.0
+  },
+  "recovery_past": {
+   "base": 1.0,
+   "clinical": 1.0
+  }
+ },
+ "items": [
+  {
+   "id": "b01_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 8.0234375,
+   "behav_clinical": 8.6015625,
+   "proj_site": 2.532994031906128,
+   "tfidf232": 0.8927073161249247,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b01_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 2.7578125,
+   "behav_clinical": -1.5234375,
+   "proj_site": -2.5406131744384766,
+   "tfidf232": 0.7130079654028971,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b01_third_person",
+   "condition": "third_person",
+   "behav_base": 5.1640625,
+   "behav_clinical": 6.390625,
+   "proj_site": -0.25434988737106323,
+   "tfidf232": 0.8035855614712435,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b01_topical",
+   "condition": "topical",
+   "behav_base": 2.125,
+   "behav_clinical": 3.90625,
+   "proj_site": -3.317312717437744,
+   "tfidf232": 0.5204998655481367,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b02_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 10.375,
+   "behav_clinical": 9.7421875,
+   "proj_site": 3.698564052581787,
+   "tfidf232": 0.7372616283513364,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b02_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 3.8046875,
+   "behav_clinical": 1.8125,
+   "proj_site": -1.2881903648376465,
+   "tfidf232": 0.6060917513008902,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b02_third_person",
+   "condition": "third_person",
+   "behav_base": 3.4765625,
+   "behav_clinical": 4.4140625,
+   "proj_site": -2.0304784774780273,
+   "tfidf232": 0.3617340890858044,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b02_topical",
+   "condition": "topical",
+   "behav_base": 6.6484375,
+   "behav_clinical": 3.9765625,
+   "proj_site": 1.2060186862945557,
+   "tfidf232": 0.28594054579481915,
+   "lexicon": 7.194244604316546
+  },
+  {
+   "id": "b03_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 8.421875,
+   "behav_clinical": 6.8515625,
+   "proj_site": 2.787074089050293,
+   "tfidf232": 0.5301241953857335,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b03_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 0.578125,
+   "behav_clinical": -3.0234375,
+   "proj_site": -3.624019145965576,
+   "tfidf232": 0.1654158770573668,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b03_third_person",
+   "condition": "third_person",
+   "behav_base": 6.4140625,
+   "behav_clinical": 4.515625,
+   "proj_site": 1.1639559268951416,
+   "tfidf232": 0.2510201071308775,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b03_fiction",
+   "condition": "fiction",
+   "behav_base": 6.078125,
+   "behav_clinical": 4.640625,
+   "proj_site": 0.7523322105407715,
+   "tfidf232": 0.1276144464608165,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b04_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 7.90625,
+   "behav_clinical": 4.4609375,
+   "proj_site": 2.569453716278076,
+   "tfidf232": 0.2774068481079797,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b04_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": -0.453125,
+   "behav_clinical": -2.9453125,
+   "proj_site": -4.327395439147949,
+   "tfidf232": 0.1698347509595248,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b04_third_person",
+   "condition": "third_person",
+   "behav_base": 0.3046875,
+   "behav_clinical": 0.640625,
+   "proj_site": -4.461104869842529,
+   "tfidf232": 0.2629195449810802,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b04_topical",
+   "condition": "topical",
+   "behav_base": 1.8671875,
+   "behav_clinical": 3.9375,
+   "proj_site": -3.5090346336364746,
+   "tfidf232": 0.43760221411967315,
+   "lexicon": 8.130081300813009
+  },
+  {
+   "id": "b05_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 9.0703125,
+   "behav_clinical": 6.84375,
+   "proj_site": 3.136453151702881,
+   "tfidf232": 0.5587352930502748,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b05_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 3.203125,
+   "behav_clinical": -1.2109375,
+   "proj_site": -1.8027153015136719,
+   "tfidf232": 0.6027884156162567,
+   "lexicon": 7.575757575757576
+  },
+  {
+   "id": "b05_third_person",
+   "condition": "third_person",
+   "behav_base": 5.5390625,
+   "behav_clinical": 3.5859375,
+   "proj_site": 0.6322695016860962,
+   "tfidf232": 0.40346498631110234,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b05_recovery_past",
+   "condition": "recovery_past",
+   "behav_base": 4.8828125,
+   "behav_clinical": 3.1796875,
+   "proj_site": -0.0031288135796785355,
+   "tfidf232": 0.36100166427127584,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b06_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 11.35546875,
+   "behav_clinical": 10.34375,
+   "proj_site": 4.109127044677734,
+   "tfidf232": 0.6750787978577752,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b06_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 3.453125,
+   "behav_clinical": 2.515625,
+   "proj_site": -1.4597132205963135,
+   "tfidf232": 0.6141826280586807,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b06_third_person",
+   "condition": "third_person",
+   "behav_base": 6.046875,
+   "behav_clinical": 6.2578125,
+   "proj_site": 0.6596936583518982,
+   "tfidf232": 0.3264320068026428,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b06_fiction",
+   "condition": "fiction",
+   "behav_base": 7.3984375,
+   "behav_clinical": 4.0546875,
+   "proj_site": 1.3888837099075317,
+   "tfidf232": 0.2779361978241045,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b07_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 8.3984375,
+   "behav_clinical": 9.03125,
+   "proj_site": 2.706328868865967,
+   "tfidf232": 0.7205132205072092,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b07_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 2.578125,
+   "behav_clinical": 0.859375,
+   "proj_site": -2.392420768737793,
+   "tfidf232": 0.7028204798656715,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b07_third_person",
+   "condition": "third_person",
+   "behav_base": 4.6328125,
+   "behav_clinical": 5.2109375,
+   "proj_site": -0.7177708148956299,
+   "tfidf232": 0.19804696436193567,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b07_topical",
+   "condition": "topical",
+   "behav_base": 4.765625,
+   "behav_clinical": 3.9375,
+   "proj_site": -1.0829914808273315,
+   "tfidf232": 0.44620361938232145,
+   "lexicon": 6.944444444444445
+  },
+  {
+   "id": "b08_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 8.0390625,
+   "behav_clinical": 7.5,
+   "proj_site": 2.606384754180908,
+   "tfidf232": 0.7249550580695763,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b08_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 2.9609375,
+   "behav_clinical": -0.0078125,
+   "proj_site": -1.8726224899291992,
+   "tfidf232": 0.2719676869063791,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b08_third_person",
+   "condition": "third_person",
+   "behav_base": 5.171875,
+   "behav_clinical": 3.8359375,
+   "proj_site": -0.04716946929693222,
+   "tfidf232": 0.24931059294582233,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b08_recovery_past",
+   "condition": "recovery_past",
+   "behav_base": 3.3046875,
+   "behav_clinical": 1.125,
+   "proj_site": -1.8327314853668213,
+   "tfidf232": 0.3755124604814738,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b09_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 10.1484375,
+   "behav_clinical": 9.65625,
+   "proj_site": 3.750999927520752,
+   "tfidf232": 0.47577486634040883,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b09_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 2.6015625,
+   "behav_clinical": -1.390625,
+   "proj_site": -2.8747506141662598,
+   "tfidf232": 0.35067859500446397,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b09_third_person",
+   "condition": "third_person",
+   "behav_base": 7.046875,
+   "behav_clinical": 5.890625,
+   "proj_site": 2.092017650604248,
+   "tfidf232": 0.3074201338355352,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b09_topical",
+   "condition": "topical",
+   "behav_base": 0.359375,
+   "behav_clinical": 1.3671875,
+   "proj_site": -4.095086097717285,
+   "tfidf232": 0.3917516958676476,
+   "lexicon": 7.299270072992701
+  },
+  {
+   "id": "b10_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 6.703125,
+   "behav_clinical": 5.828125,
+   "proj_site": 1.9706374406814575,
+   "tfidf232": 0.39896332459326184,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b10_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 2.4765625,
+   "behav_clinical": -0.8671875,
+   "proj_site": -2.769001007080078,
+   "tfidf232": 0.6514432038142576,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b10_third_person",
+   "condition": "third_person",
+   "behav_base": 7.78125,
+   "behav_clinical": 4.0625,
+   "proj_site": 2.2096619606018066,
+   "tfidf232": 0.12626745419637161,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b10_topical",
+   "condition": "topical",
+   "behav_base": 5.5625,
+   "behav_clinical": 2.9765625,
+   "proj_site": -0.021480945870280266,
+   "tfidf232": 0.35506965466108287,
+   "lexicon": 7.575757575757576
+  },
+  {
+   "id": "b11_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 11.015625,
+   "behav_clinical": 10.3984375,
+   "proj_site": 4.124503135681152,
+   "tfidf232": 0.5271375362925382,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b11_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 5.875,
+   "behav_clinical": 4.3671875,
+   "proj_site": 1.1671524047851562,
+   "tfidf232": 0.7416155257312395,
+   "lexicon": 7.633587786259542
+  },
+  {
+   "id": "b11_third_person",
+   "condition": "third_person",
+   "behav_base": 6.1484375,
+   "behav_clinical": 6.96875,
+   "proj_site": 1.0653566122055054,
+   "tfidf232": 0.4391693924913541,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b11_fiction",
+   "condition": "fiction",
+   "behav_base": 5.2265625,
+   "behav_clinical": 4.7890625,
+   "proj_site": -0.20984187722206116,
+   "tfidf232": 0.22270901285215272,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b12_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 9.4296875,
+   "behav_clinical": 9.2265625,
+   "proj_site": 3.313943386077881,
+   "tfidf232": 0.537836729673388,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b12_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 0.9296875,
+   "behav_clinical": -2.6328125,
+   "proj_site": -3.778219699859619,
+   "tfidf232": 0.5564042703080743,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b12_third_person",
+   "condition": "third_person",
+   "behav_base": 5.5625,
+   "behav_clinical": 7.265625,
+   "proj_site": 0.7926169633865356,
+   "tfidf232": 0.42064437384171754,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b12_recovery_past",
+   "condition": "recovery_past",
+   "behav_base": 3.5703125,
+   "behav_clinical": 5.1640625,
+   "proj_site": -1.512031078338623,
+   "tfidf232": 0.31706130039661873,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b13_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 10.58203125,
+   "behav_clinical": 10.5,
+   "proj_site": 3.909120559692383,
+   "tfidf232": 0.7786259254233544,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b13_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 3.4296875,
+   "behav_clinical": -1.375,
+   "proj_site": -1.5462020635604858,
+   "tfidf232": 0.3367369874364145,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b13_third_person",
+   "condition": "third_person",
+   "behav_base": 6.6796875,
+   "behav_clinical": 7.6875,
+   "proj_site": 1.392209768295288,
+   "tfidf232": 0.41212671314356236,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b13_topical",
+   "condition": "topical",
+   "behav_base": 5.640625,
+   "behav_clinical": 4.359375,
+   "proj_site": 0.5982650518417358,
+   "tfidf232": 0.9279740473374534,
+   "lexicon": 6.5359477124183005
+  },
+  {
+   "id": "b14_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 9.6640625,
+   "behav_clinical": 10.078125,
+   "proj_site": 3.4372098445892334,
+   "tfidf232": 0.5742098157257698,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b14_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 1.4140625,
+   "behav_clinical": -1.5625,
+   "proj_site": -3.0431575775146484,
+   "tfidf232": 0.5674063947933407,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b14_third_person",
+   "condition": "third_person",
+   "behav_base": 4.75,
+   "behav_clinical": 4.3359375,
+   "proj_site": -0.6372454166412354,
+   "tfidf232": 0.2850275378356786,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b14_fiction",
+   "condition": "fiction",
+   "behav_base": 5.4453125,
+   "behav_clinical": 3.390625,
+   "proj_site": -0.23465944826602936,
+   "tfidf232": 0.24051296671543046,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b15_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 9.09375,
+   "behav_clinical": 8.546875,
+   "proj_site": 3.2599663734436035,
+   "tfidf232": 0.4959783573030676,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b15_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 2.1796875,
+   "behav_clinical": -1.0546875,
+   "proj_site": -2.8850204944610596,
+   "tfidf232": 0.3393780838519913,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b15_third_person",
+   "condition": "third_person",
+   "behav_base": 5.2734375,
+   "behav_clinical": 6.265625,
+   "proj_site": 0.317361444234848,
+   "tfidf232": 0.3318997235482288,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b15_recovery_past",
+   "condition": "recovery_past",
+   "behav_base": 6.6875,
+   "behav_clinical": 6.8984375,
+   "proj_site": 1.747942328453064,
+   "tfidf232": 0.3885933011723727,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b16_genuine",
+   "condition": "genuine_intent",
+   "behav_base": 10.4453125,
+   "behav_clinical": 10.171875,
+   "proj_site": 3.833380937576294,
+   "tfidf232": 0.4831400792249045,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b16_counterfactual",
+   "condition": "counterfactual",
+   "behav_base": 3.0703125,
+   "behav_clinical": 0.2890625,
+   "proj_site": -2.41007924079895,
+   "tfidf232": 0.8467510036385385,
+   "lexicon": 7.142857142857143
+  },
+  {
+   "id": "b16_third_person",
+   "condition": "third_person",
+   "behav_base": 4.421875,
+   "behav_clinical": 6.8984375,
+   "proj_site": -0.28930339217185974,
+   "tfidf232": 0.2301806717451978,
+   "lexicon": 0.0
+  },
+  {
+   "id": "b16_topical",
+   "condition": "topical",
+   "behav_base": -0.5703125,
+   "behav_clinical": -0.2578125,
+   "proj_site": -4.291966438293457,
+   "tfidf232": 0.3553232224432672,
+   "lexicon": 7.042253521126761
+  }
+ ],
+ "runtime_min": 3.8,
+ "finished_utc": "2026-10-08T04:42:33Z"
+}

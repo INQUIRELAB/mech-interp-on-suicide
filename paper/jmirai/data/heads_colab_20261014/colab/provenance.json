@@ -1,0 +1,347 @@
+{
+  "commits": [
+    {
+      "commit": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "date": "2024-09-25",
+      "title": "Update README.md",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "db88166e2bc4c799fd5d1ae643b75e84d03ee70e",
+      "tokenizer_json": "5cc5f00a5b203e90a27a3bd60d1ec393b07971e8",
+      "config": "0bb6fd75b3ad2fe988565929f329945262c2814e",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "5206a32e0bd3067aef1ce90f5528ade7d866253f",
+      "date": "2024-08-20",
+      "title": "add base_model metadata (#105)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "db88166e2bc4c799fd5d1ae643b75e84d03ee70e",
+      "tokenizer_json": "5cc5f00a5b203e90a27a3bd60d1ec393b07971e8",
+      "config": "0bb6fd75b3ad2fe988565929f329945262c2814e",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "8c22764a7e3675c50d4c7c9a4edb474456022b16",
+      "date": "2024-07-30",
+      "title": "Add tool use example to README (#64)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "db88166e2bc4c799fd5d1ae643b75e84d03ee70e",
+      "tokenizer_json": "5cc5f00a5b203e90a27a3bd60d1ec393b07971e8",
+      "config": "0bb6fd75b3ad2fe988565929f329945262c2814e",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "b2a4d0f33b41fcd59a6d31662cc63b8d53367e1e",
+      "date": "2024-07-29",
+      "title": "Update chat template (#53)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "6570668dec1f28456bf8488ef82f02bd4580abbc",
+      "tokenizer_json": "5cc5f00a5b203e90a27a3bd60d1ec393b07971e8",
+      "config": "0bb6fd75b3ad2fe988565929f329945262c2814e",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "07eb05b21d191a58c577b4a45982fe0c049d0693",
+      "date": "2024-07-24",
+      "title": "Upload tokenizer (#29)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "5cc5f00a5b203e90a27a3bd60d1ec393b07971e8",
+      "config": "0bb6fd75b3ad2fe988565929f329945262c2814e",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "4281e96c7cf5ab6b312ef0cb78373efa3976a9dd",
+      "date": "2024-07-23",
+      "title": "Update config.json",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "0bb6fd75b3ad2fe988565929f329945262c2814e",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "257111e889d835eecd62c11c4d9b4f4a3099ac9f",
+      "date": "2024-07-23",
+      "title": "Update README.md (#8)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "4b1a1640b72fd61241feaf9460b5b4cf867a60f6",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "91e702621d649240f67086276478556294b22eeb",
+      "date": "2024-07-23",
+      "title": "Update config.json",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "4b1a1640b72fd61241feaf9460b5b4cf867a60f6",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "9fd0b760200bab0a7af5e24c14f1283ecdb4765f",
+      "date": "2024-07-23",
+      "title": "Delete original/Meta-Llama-3.1-8B-Instruct-20240717110000.md5 (#7)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "05114025b944f996c423c82a33e3408b6796d8e5",
+      "date": "2024-07-23",
+      "title": "Update README.md (#6)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "b0031a6124737490cf9ebca50d515eafb5dbe6e5",
+      "date": "2024-07-23",
+      "title": "Update README.md (#5)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "50ba44f44fb8198ff0ac18363c700882498586b8",
+      "date": "2024-07-23",
+      "title": "Update README.md (#2)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "6eaee04351d92f7f94b3217fa3e09de16cc35373",
+      "date": "2024-07-23",
+      "title": "Delete patch before release (#3)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "85799738832cb7392067696db859156610a4774b",
+      "date": "2024-07-23",
+      "title": "Update `language` metadata to include all supported languages (#4)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "c5e2120acf5e564cb8b52c73fe433ef06d5bcd31",
+      "date": "2024-07-23",
+      "title": "Upload USE_POLICY.md",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "41a8cf4ab833d92479a2fa2ba2e95b13f39b488b",
+      "date": "2024-07-23",
+      "title": "Create README.md",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "f218d214b549034a46ffe6a8369a83a8eeb91b6c",
+      "date": "2024-07-22",
+      "title": "Upload LICENSE",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "eab2576f077c70d8e14fae9e815926a9af96a524",
+      "date": "2024-07-22",
+      "title": "Add files using large-upload tool",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "6bc1c4ea3dec3f5ccb4e7d30f1890b68f4f27732",
+      "date": "2024-07-22",
+      "title": "Add files using large-upload tool",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "b5d0bdd351176dfdc9d0ec166b6e88316c82a887",
+      "date": "2024-07-22",
+      "title": "Add files using large-upload tool",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "df34336b42332c6d360959e259cd6271c6a09fd4",
+      "date": "2024-07-18",
+      "title": "Upload patch.diff (#1)",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "6d52333029e2eee3b787f7457bbfb4c725f7787d",
+      "date": "2024-07-18",
+      "title": "Update config.json",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "283f6bc55d4ed798c59913600634bb4267ff7db4",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "9b17df7da8b89e577045f3617f4af89796182461",
+      "date": "2024-07-18",
+      "title": "Update generation_config.json",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "7df5b8bc2d572269e163f1b644dbc5f25242c7ec",
+      "generation_config": "cc7276afd599de091142c6ed3005faf8a74aa257"
+    },
+    {
+      "commit": "f59ac2594c90639976a962a27d91444349052c3e",
+      "date": "2024-07-18",
+      "title": "Update patch.diff",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "7df5b8bc2d572269e163f1b644dbc5f25242c7ec",
+      "generation_config": "c797038ff97e109146b672608599ee4e3072d21c"
+    },
+    {
+      "commit": "5a75758ee35e2ce75c9676d6cd932bf7d7f56e9a",
+      "date": "2024-07-18",
+      "title": "Update patch.diff",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "7df5b8bc2d572269e163f1b644dbc5f25242c7ec",
+      "generation_config": "c797038ff97e109146b672608599ee4e3072d21c"
+    },
+    {
+      "commit": "27a2933fb533a76b333e9d1db52f3e73d27687ab",
+      "date": "2024-07-18",
+      "title": "Add files using large-upload tool",
+      "weights": "76130e0e3976",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "7df5b8bc2d572269e163f1b644dbc5f25242c7ec",
+      "generation_config": "c797038ff97e109146b672608599ee4e3072d21c"
+    },
+    {
+      "commit": "4f1d3ed3d2a0508618dd725c187350034e3f5c9c",
+      "date": "2024-07-18",
+      "title": "Add files using large-upload tool",
+      "weights": "5e13a9730fcd",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "7df5b8bc2d572269e163f1b644dbc5f25242c7ec",
+      "generation_config": "c797038ff97e109146b672608599ee4e3072d21c"
+    },
+    {
+      "commit": "b0777c15de33d4c072c2038e5cae54c35f42bf09",
+      "date": "2024-07-18",
+      "title": "Add files using large-upload tool",
+      "weights": "673a250a34bf",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "7df5b8bc2d572269e163f1b644dbc5f25242c7ec",
+      "generation_config": "c797038ff97e109146b672608599ee4e3072d21c"
+    },
+    {
+      "commit": "594e0ef724dd2c0de535f7260cb189278a4297da",
+      "date": "2024-07-18",
+      "title": "Add files using large-upload tool",
+      "weights": "fb7d83c4f4bd",
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "7df5b8bc2d572269e163f1b644dbc5f25242c7ec",
+      "generation_config": "c797038ff97e109146b672608599ee4e3072d21c"
+    },
+    {
+      "commit": "a141ccd0a818537acaa489b5e86f286ff377bc04",
+      "date": "2024-07-18",
+      "title": "Add files using large-upload tool",
+      "weights": null,
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "7df5b8bc2d572269e163f1b644dbc5f25242c7ec",
+      "generation_config": "c797038ff97e109146b672608599ee4e3072d21c"
+    },
+    {
+      "commit": "bedbcc3b91b656331bf7569fa6661dad0cec360f",
+      "date": "2024-07-18",
+      "title": "Add files using large-upload tool",
+      "weights": null,
+      "tokenizer_config": "421cda369d1e01e742b01d82e3a39c7cc82a8586",
+      "tokenizer_json": "412806596a1283ba83602123e49ec97da18e7f16",
+      "config": "7df5b8bc2d572269e163f1b644dbc5f25242c7ec",
+      "generation_config": "c797038ff97e109146b672608599ee4e3072d21c"
+    },
+    {
+      "commit": "ecce6c2437befccd8525a73f396c2d3aa7abaa7d",
+      "date": "2024-07-18",
+      "title": "Add files using large-upload tool",
+      "weights": null,
+      "tokenizer_config": null,
+      "tokenizer_json": null,
+      "config": null,
+      "generation_config": null
+    },
+    {
+      "commit": "20850ea21aa5ed51db474a6c0b15445c2f5c83c6",
+      "date": "2024-07-18",
+      "title": "initial commit",
+      "weights": null,
+      "tokenizer_config": null,
+      "tokenizer_json": null,
+      "config": null,
+      "generation_config": null
+    }
+  ],
+  "n_distinct_weight_sets": 4,
+  "tokenization_identical_by_tokenizer_revision": {
+    "0e9e39f249a16976918f6564b8830bc894c89659": true,
+    "b2a4d0f33b41fcd59a6d31662cc63b8d53367e1e": true,
+    "07eb05b21d191a58c577b4a45982fe0c049d0693": false,
+    "4281e96c7cf5ab6b312ef0cb78373efa3976a9dd": false
+  },
+  "revision_independent": false,
+  "env": {
+    "seed": 0,
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision_requested": "0e9e39f249a16976918f6564b8830bc894c89659"
+  }
+}

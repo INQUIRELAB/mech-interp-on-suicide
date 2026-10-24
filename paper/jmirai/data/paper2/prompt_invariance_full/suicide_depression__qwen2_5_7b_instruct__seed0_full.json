@@ -1,0 +1,179 @@
+{
+ "model": "/root/models/Qwen2.5-7B-Instruct",
+ "model_tag": "qwen2_5_7b_instruct",
+ "concept": "suicide_depression",
+ "config": {
+  "model": "/root/models/Qwen2.5-7B-Instruct",
+  "dtype": "float16",
+  "concept": "suicide_depression",
+  "n_fit": 2000,
+  "n_eval": 1000,
+  "variants": "base,neg_flip,clinical,contrast,escalate,fewshot,rating",
+  "batch": 16,
+  "seed": 0,
+  "out_dir": "/root/rev_full/results/prompt_invariance_full",
+  "smoke": false,
+  "body_tokens": 4096,
+  "max_batch_tokens": 16384,
+  "out_suffix": "_full"
+ },
+ "n_eval_per_class": 1000,
+ "tfidf_auc": 0.843187,
+ "body_budget": 4096,
+ "n_eval_truncated": 0,
+ "tfidf_ci95": [
+  0.826493825,
+  0.8597212249999999
+ ],
+ "variants": {
+  "base": {
+   "auc": 0.824206,
+   "ci95": [
+    0.8058991875000001,
+    0.8418514749999999
+   ],
+   "minus_tfidf_ci95": [
+    -0.0371150375,
+    -0.0005589250000000132
+   ],
+   "stack_cv_auc": 0.8620519999999999,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.01054032500000002,
+    0.02765080000000002
+   ],
+   "score_mean_pos": 24.089874267578125,
+   "score_mean_neg": 5.575534343719482,
+   "frac_yes_pos": 0.936,
+   "frac_yes_neg": 0.574
+  },
+  "neg_flip": {
+   "auc": 0.7386695,
+   "ci95": [
+    0.7171883499999999,
+    0.7604106500000001
+   ],
+   "minus_tfidf_ci95": [
+    -0.1281296374999999,
+    -0.08125500000000013
+   ],
+   "stack_cv_auc": 0.850754,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.0016742749999999807,
+    0.014569424999999941
+   ],
+   "score_mean_pos": 15.438722610473633,
+   "score_mean_neg": 11.473146438598633,
+   "frac_yes_pos": 0.992,
+   "frac_yes_neg": 0.944
+  },
+  "clinical": {
+   "auc": 0.8441694999999999,
+   "ci95": [
+    0.8270736624999999,
+    0.8606282624999999
+   ],
+   "minus_tfidf_ci95": [
+    -0.01552440000000006,
+    0.01750362500000004
+   ],
+   "stack_cv_auc": 0.8688290000000001,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.016553074999999882,
+    0.034862050000000026
+   ],
+   "score_mean_pos": 19.371585845947266,
+   "score_mean_neg": -4.745356559753418,
+   "frac_yes_pos": 0.862,
+   "frac_yes_neg": 0.342
+  },
+  "contrast": {
+   "auc": 0.8512225,
+   "ci95": [
+    0.8342122624999999,
+    0.867131775
+   ],
+   "minus_tfidf_ci95": [
+    -0.008161675000000201,
+    0.024229525000000016
+   ],
+   "stack_cv_auc": 0.8738009999999999,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.021156724999999984,
+    0.040629150000000024
+   ],
+   "score_mean_pos": 15.745340347290039,
+   "score_mean_neg": -6.319398403167725,
+   "frac_yes_pos": 0.836,
+   "frac_yes_neg": 0.291
+  },
+  "escalate": {
+   "auc": 0.798549,
+   "ci95": [
+    0.7786714625000001,
+    0.8177507999999998
+   ],
+   "minus_tfidf_ci95": [
+    -0.06471785,
+    -0.023641000000000204
+   ],
+   "stack_cv_auc": 0.859577,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.008347875000000135,
+    0.025274775000000017
+   ],
+   "score_mean_pos": 25.552879333496094,
+   "score_mean_neg": 13.084595680236816,
+   "frac_yes_pos": 0.974,
+   "frac_yes_neg": 0.771
+  },
+  "fewshot": {
+   "auc": 0.8461735000000001,
+   "ci95": [
+    0.8286963375,
+    0.86236655
+   ],
+   "minus_tfidf_ci95": [
+    -0.014358700000000165,
+    0.019661449999999973
+   ],
+   "stack_cv_auc": 0.8717370000000002,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.01886217499999996,
+    0.03865664999999991
+   ],
+   "score_mean_pos": 14.04859733581543,
+   "score_mean_neg": -5.5649638175964355,
+   "frac_yes_pos": 0.851,
+   "frac_yes_neg": 0.33
+  },
+  "rating": {
+   "auc": 0.836812,
+   "ci95": [
+    0.8188233500000001,
+    0.8537823000000001
+   ],
+   "minus_tfidf_ci95": [
+    -0.024011774999999836,
+    0.011122074999999943
+   ],
+   "stack_cv_auc": 0.86526,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.012732050000000019,
+    0.0319561000000001
+   ],
+   "score_mean_pos": 4.526566099054104,
+   "score_mean_neg": 3.55356010526834,
+   "frac_yes_pos": null,
+   "frac_yes_neg": null
+  }
+ },
+ "tfidf_cv_auc": 0.8428880000000001,
+ "runtime_min": 8.13
+}

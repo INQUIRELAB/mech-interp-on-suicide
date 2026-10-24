@@ -1,0 +1,126 @@
+{
+  "SDCNL": {
+    "all": {
+      "n_per_class_decoding": [
+        120,
+        120
+      ],
+      "decoding_transfer_auc": 0.9627777777777777,
+      "behavioral_auc_120": 0.9592013888888888,
+      "n_per_class_causal": [
+        80,
+        80
+      ],
+      "causal": {
+        "baseline": 0.951015625,
+        "ablate_232K_dirs": 0.675546875,
+        "random": 0.9534375,
+        "drop_ci95": [
+          0.19281054687500004,
+          0.3623476562499999
+        ],
+        "random_drop_ci95": [
+          -0.006640624999999956,
+          0.0004687499999999095
+        ]
+      }
+    },
+    "excluding_overlap": {
+      "n_per_class_decoding": [
+        120,
+        120
+      ],
+      "decoding_transfer_auc": 0.9627777777777777,
+      "behavioral_auc_120": 0.9592013888888888,
+      "n_per_class_causal": [
+        80,
+        80
+      ],
+      "causal": {
+        "baseline": 0.951015625,
+        "ablate_232K_dirs": 0.675546875,
+        "random": 0.9534375,
+        "drop_ci95": [
+          0.19281054687500004,
+          0.3623476562499999
+        ],
+        "random_drop_ci95": [
+          -0.006640624999999956,
+          0.0004687499999999095
+        ]
+      }
+    },
+    "old_fp16_crossablation_json": {
+      "baseline": 0.9508593750000001,
+      "ablate07": 0.666484375,
+      "random": 0.95359375
+    }
+  },
+  "SWMH": {
+    "all": {
+      "n_per_class_decoding": [
+        120,
+        120
+      ],
+      "decoding_transfer_auc": 0.9172222222222223,
+      "behavioral_auc_120": 0.9346180555555555,
+      "n_per_class_causal": [
+        80,
+        80
+      ],
+      "causal": {
+        "baseline": 0.93734375,
+        "ablate_232K_dirs": 0.757578125,
+        "random": 0.93515625,
+        "drop_ci95": [
+          0.0993671875,
+          0.2664160156249999
+        ],
+        "random_drop_ci95": [
+          -0.0023437499999999804,
+          0.007033203125000032
+        ]
+      }
+    },
+    "excluding_overlap": {
+      "n_per_class_decoding": [
+        120,
+        120
+      ],
+      "decoding_transfer_auc": 0.9172222222222223,
+      "behavioral_auc_120": 0.9346180555555555,
+      "n_per_class_causal": [
+        80,
+        80
+      ],
+      "causal": {
+        "baseline": 0.93734375,
+        "ablate_232K_dirs": 0.757578125,
+        "random": 0.93515625,
+        "drop_ci95": [
+          0.0993671875,
+          0.2664160156249999
+        ],
+        "random_drop_ci95": [
+          -0.0023437499999999804,
+          0.007033203125000032
+        ]
+      }
+    },
+    "old_fp16_crossablation_json": {
+      "baseline": 0.9371875000000001,
+      "ablate07": 0.756484375,
+      "random": 0.9349218750000001
+    }
+  },
+  "env": {
+    "seed": 0,
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision_requested": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "revision_resolved": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "precision": "fp16",
+    "transformers": "4.56.2",
+    "torch": "2.11.0+cu130",
+    "gpu": "NVIDIA A100-SXM4-80GB"
+  }
+}

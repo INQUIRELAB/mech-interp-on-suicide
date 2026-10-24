@@ -1,0 +1,22 @@
+{
+ "saved_tfidf_auc": 0.948724,
+ "saved_behavioral_auc": 0.9558875000000001,
+ "saved_behavioral_ci95": [
+  0.9473098249999999,
+  0.9641876625
+ ],
+ "tfidf_full_auc": 0.9488740000000001,
+ "frac_truncated": {
+  "suicide": 0.148,
+  "nonsuicide": 0.031
+ },
+ "tfidf_trunc_auc": 0.9480629999999999,
+ "tfidf_trunc_ci95": [
+  0.93857295,
+  0.9569985999999999
+ ],
+ "trunc_minus_full_ci95": [
+  -0.002262050000000093,
+  0.0007274999999998144
+ ]
+}

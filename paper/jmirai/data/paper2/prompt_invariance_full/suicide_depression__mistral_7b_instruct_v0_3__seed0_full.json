@@ -1,0 +1,179 @@
+{
+ "model": "/root/models/Mistral-7B-Instruct-v0.3",
+ "model_tag": "mistral_7b_instruct_v0_3",
+ "concept": "suicide_depression",
+ "config": {
+  "model": "/root/models/Mistral-7B-Instruct-v0.3",
+  "dtype": "float16",
+  "concept": "suicide_depression",
+  "n_fit": 2000,
+  "n_eval": 1000,
+  "variants": "base,neg_flip,clinical,contrast,escalate,fewshot,rating",
+  "batch": 16,
+  "seed": 0,
+  "out_dir": "/root/rev_full/results/prompt_invariance_full",
+  "smoke": false,
+  "body_tokens": 4096,
+  "max_batch_tokens": 16384,
+  "out_suffix": "_full"
+ },
+ "n_eval_per_class": 1000,
+ "tfidf_auc": 0.843187,
+ "body_budget": 4096,
+ "n_eval_truncated": 1,
+ "tfidf_ci95": [
+  0.826493825,
+  0.8597212249999999
+ ],
+ "variants": {
+  "base": {
+   "auc": 0.80952,
+   "ci95": [
+    0.7907739874999999,
+    0.8277505749999999
+   ],
+   "minus_tfidf_ci95": [
+    -0.05316973749999991,
+    -0.014233237500000077
+   ],
+   "stack_cv_auc": 0.8552309999999999,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.005233975000000069,
+    0.019367150000000024
+   ],
+   "score_mean_pos": 16.987110137939453,
+   "score_mean_neg": 6.870523452758789,
+   "frac_yes_pos": 0.956,
+   "frac_yes_neg": 0.698
+  },
+  "neg_flip": {
+   "auc": 0.788628,
+   "ci95": [
+    0.768755625,
+    0.8070510624999999
+   ],
+   "minus_tfidf_ci95": [
+    -0.07500263749999996,
+    -0.034582525000000024
+   ],
+   "stack_cv_auc": 0.8583469999999999,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.00800164999999993,
+    0.023552100000000124
+   ],
+   "score_mean_pos": 7.478085994720459,
+   "score_mean_neg": 1.2230234146118164,
+   "frac_yes_pos": 0.929,
+   "frac_yes_neg": 0.676
+  },
+  "clinical": {
+   "auc": 0.8415699999999999,
+   "ci95": [
+    0.8244062625000002,
+    0.8583957375
+   ],
+   "minus_tfidf_ci95": [
+    -0.019088862500000085,
+    0.015089537500000158
+   ],
+   "stack_cv_auc": 0.865205,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.013488324999999973,
+    0.03126317499999997
+   ],
+   "score_mean_pos": 16.09421157836914,
+   "score_mean_neg": 1.2402968406677246,
+   "frac_yes_pos": 0.921,
+   "frac_yes_neg": 0.492
+  },
+  "contrast": {
+   "auc": 0.853199,
+   "ci95": [
+    0.8358615500000001,
+    0.8689795625000001
+   ],
+   "minus_tfidf_ci95": [
+    -0.00746566249999984,
+    0.026724074999999972
+   ],
+   "stack_cv_auc": 0.8695330000000001,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.016918625000000125,
+    0.03578204999999998
+   ],
+   "score_mean_pos": 14.621999740600586,
+   "score_mean_neg": 1.9957343339920044,
+   "frac_yes_pos": 0.946,
+   "frac_yes_neg": 0.528
+  },
+  "escalate": {
+   "auc": 0.745989,
+   "ci95": [
+    0.724060275,
+    0.766868625
+   ],
+   "minus_tfidf_ci95": [
+    -0.11987287500000013,
+    -0.0741116000000001
+   ],
+   "stack_cv_auc": 0.8502050000000001,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.001752050000000005,
+    0.012474424999999983
+   ],
+   "score_mean_pos": 18.173086166381836,
+   "score_mean_neg": 14.306976318359375,
+   "frac_yes_pos": 0.994,
+   "frac_yes_neg": 0.921
+  },
+  "fewshot": {
+   "auc": 0.8095219999999999,
+   "ci95": [
+    0.7908748375,
+    0.8275555375
+   ],
+   "minus_tfidf_ci95": [
+    -0.053703175000000034,
+    -0.01416359999999994
+   ],
+   "stack_cv_auc": 0.8675500000000002,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.01575502499999999,
+    0.03352377499999997
+   ],
+   "score_mean_pos": 12.418179512023926,
+   "score_mean_neg": 4.992859363555908,
+   "frac_yes_pos": 0.967,
+   "frac_yes_neg": 0.687
+  },
+  "rating": {
+   "auc": 0.8160990000000001,
+   "ci95": [
+    0.796761925,
+    0.83431205
+   ],
+   "minus_tfidf_ci95": [
+    -0.045791425,
+    -0.009043824999999873
+   ],
+   "stack_cv_auc": 0.859615,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.008219725000000006,
+    0.02540435000000009
+   ],
+   "score_mean_pos": 4.261764268266729,
+   "score_mean_neg": 3.272707023163153,
+   "frac_yes_pos": null,
+   "frac_yes_neg": null
+  }
+ },
+ "tfidf_cv_auc": 0.8428880000000001,
+ "runtime_min": 8.85
+}

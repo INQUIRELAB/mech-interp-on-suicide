@@ -1,0 +1,174 @@
+{
+ "model": "unsloth/gemma-2-9b-it",
+ "model_tag": "gemma_2_9b_it",
+ "concept": "suicide_depression",
+ "config": {
+  "model": "unsloth/gemma-2-9b-it",
+  "dtype": "bfloat16",
+  "concept": "suicide_depression",
+  "n_fit": 2000,
+  "n_eval": 1000,
+  "variants": "base,neg_flip,clinical,contrast,escalate,fewshot,rating",
+  "batch": 4,
+  "seed": 0,
+  "out_dir": "/root/rev_jmir/results/paper2/prompt_invariance",
+  "smoke": false
+ },
+ "n_eval_per_class": 1000,
+ "tfidf_auc": 0.843187,
+ "tfidf_ci95": [
+  0.826493825,
+  0.8597212249999999
+ ],
+ "variants": {
+  "base": {
+   "auc": 0.825607,
+   "ci95": [
+    0.806868975,
+    0.8439879375
+   ],
+   "minus_tfidf_ci95": [
+    -0.03514541249999994,
+    0.0015996374999999777
+   ],
+   "stack_cv_auc": 0.86808,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.015819400000000084,
+    0.03491217499999994
+   ],
+   "score_mean_pos": 15.471245765686035,
+   "score_mean_neg": 1.0877459049224854,
+   "frac_yes_pos": 0.914,
+   "frac_yes_neg": 0.451
+  },
+  "neg_flip": {
+   "auc": 0.8119784999999999,
+   "ci95": [
+    0.7924911750000002,
+    0.8314171374999999
+   ],
+   "minus_tfidf_ci95": [
+    -0.04920211249999992,
+    -0.011989762499999947
+   ],
+   "stack_cv_auc": 0.860981,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.010010775000000157,
+    0.026127750000000113
+   ],
+   "score_mean_pos": 12.051804542541504,
+   "score_mean_neg": 7.287208080291748,
+   "frac_yes_pos": 0.988,
+   "frac_yes_neg": 0.892
+  },
+  "clinical": {
+   "auc": 0.8313765000000001,
+   "ci95": [
+    0.813339925,
+    0.8494186375
+   ],
+   "minus_tfidf_ci95": [
+    -0.029422662500000057,
+    0.005914212499999978
+   ],
+   "stack_cv_auc": 0.8683019999999999,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.015894524999999993,
+    0.03507252499999999
+   ],
+   "score_mean_pos": 12.788196563720703,
+   "score_mean_neg": -3.3988592624664307,
+   "frac_yes_pos": 0.847,
+   "frac_yes_neg": 0.325
+  },
+  "contrast": {
+   "auc": 0.834099,
+   "ci95": [
+    0.8156082125,
+    0.8511203374999999
+   ],
+   "minus_tfidf_ci95": [
+    -0.026807512500000068,
+    0.008223100000000132
+   ],
+   "stack_cv_auc": 0.8677290000000001,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.015340574999999999,
+    0.03451814999999994
+   ],
+   "score_mean_pos": 12.195539474487305,
+   "score_mean_neg": -3.1503355503082275,
+   "frac_yes_pos": 0.824,
+   "frac_yes_neg": 0.316
+  },
+  "escalate": {
+   "auc": 0.7751105,
+   "ci95": [
+    0.7547656250000001,
+    0.7961166625
+   ],
+   "minus_tfidf_ci95": [
+    -0.0896571125,
+    -0.04533615000000011
+   ],
+   "stack_cv_auc": 0.8586610000000001,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.008179475000000066,
+    0.02296669999999983
+   ],
+   "score_mean_pos": 19.434574127197266,
+   "score_mean_neg": 13.066158294677734,
+   "frac_yes_pos": 0.985,
+   "frac_yes_neg": 0.873
+  },
+  "fewshot": {
+   "auc": 0.8059545000000001,
+   "ci95": [
+    0.7862149374999999,
+    0.8245138999999999
+   ],
+   "minus_tfidf_ci95": [
+    -0.05740736250000007,
+    -0.01744430000000004
+   ],
+   "stack_cv_auc": 0.868862,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.016864850000000018,
+    0.035225100000000065
+   ],
+   "score_mean_pos": 11.399383544921875,
+   "score_mean_neg": 3.2083916664123535,
+   "frac_yes_pos": 0.946,
+   "frac_yes_neg": 0.565
+  },
+  "rating": {
+   "auc": 0.8273815,
+   "ci95": [
+    0.8091858,
+    0.845016275
+   ],
+   "minus_tfidf_ci95": [
+    -0.03417121249999999,
+    0.002376899999999836
+   ],
+   "stack_cv_auc": 0.865034,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.012547700000000139,
+    0.03190812500000001
+   ],
+   "score_mean_pos": 4.3812180009335915,
+   "score_mean_neg": 3.3821305660307597,
+   "frac_yes_pos": null,
+   "frac_yes_neg": null
+  }
+ },
+ "tfidf_cv_auc": 0.8428880000000001,
+ "runtime_min": 17.48
+}

@@ -1,0 +1,211 @@
+{
+ "concept": "suicide_depression",
+ "display_name": "Suicide vs depression (matched distress, SWMH)",
+ "source": "this project (SWMH, matched register)",
+ "model": "meta-llama/Llama-3.1-8B-Instruct",
+ "model_tag": "llama_3_1_8b_instruct",
+ "seed": 0,
+ "dtype": "float16",
+ "n_fit": 2000,
+ "n_eval": 1000,
+ "config": {
+  "concept": "suicide_depression",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "dtype": "float16",
+  "load_in_8bit": false,
+  "n_fit": 2000,
+  "n_eval": 1000,
+  "n_nec": 300,
+  "n_steer": 300,
+  "n_ref": 48,
+  "n_null": 10,
+  "kappa": 0.1,
+  "alpha_level": 0.01,
+  "site": null,
+  "half_window": 4,
+  "nec_modes": "zero,mean",
+  "families": "isotropic,pca,sign_random,shuffled_label",
+  "batch": 16,
+  "seed": 0,
+  "force_ladder": false,
+  "out_dir": "/mnt/nas/MI on suicide-Nafiz Ahmed(revision)/results/paper2/matched_register",
+  "smoke": false
+ },
+ "gate": {
+  "behavioral_auc": 0.798349,
+  "behavioral_ci95": [
+   0.7781590124999999,
+   0.8176221874999998
+  ],
+  "tfidf_auc": 0.843187,
+  "tfidf_ci95": [
+   0.826493825,
+   0.8597212249999999
+  ],
+  "behavior_minus_tfidf_ci95": [
+   -0.06392457499999989,
+   -0.025545287500000066
+  ],
+  "decision": "NO-GO"
+ },
+ "decodable": {
+  "probe_per_layer": [
+   {
+    "hidden_index": 0,
+    "auc": 0.5
+   },
+   {
+    "hidden_index": 1,
+    "auc": 0.695505
+   },
+   {
+    "hidden_index": 2,
+    "auc": 0.712521
+   },
+   {
+    "hidden_index": 3,
+    "auc": 0.718399
+   },
+   {
+    "hidden_index": 4,
+    "auc": 0.728389
+   },
+   {
+    "hidden_index": 5,
+    "auc": 0.742287
+   },
+   {
+    "hidden_index": 6,
+    "auc": 0.742077
+   },
+   {
+    "hidden_index": 7,
+    "auc": 0.752484
+   },
+   {
+    "hidden_index": 8,
+    "auc": 0.764409
+   },
+   {
+    "hidden_index": 9,
+    "auc": 0.7777740000000001
+   },
+   {
+    "hidden_index": 10,
+    "auc": 0.774134
+   },
+   {
+    "hidden_index": 11,
+    "auc": 0.790605
+   },
+   {
+    "hidden_index": 12,
+    "auc": 0.790676
+   },
+   {
+    "hidden_index": 13,
+    "auc": 0.811298
+   },
+   {
+    "hidden_index": 14,
+    "auc": 0.812478
+   },
+   {
+    "hidden_index": 15,
+    "auc": 0.8167
+   },
+   {
+    "hidden_index": 16,
+    "auc": 0.815714
+   },
+   {
+    "hidden_index": 17,
+    "auc": 0.8130419999999999
+   },
+   {
+    "hidden_index": 18,
+    "auc": 0.815083
+   },
+   {
+    "hidden_index": 19,
+    "auc": 0.8156479999999999
+   },
+   {
+    "hidden_index": 20,
+    "auc": 0.8202649999999999
+   },
+   {
+    "hidden_index": 21,
+    "auc": 0.818739
+   },
+   {
+    "hidden_index": 22,
+    "auc": 0.814641
+   },
+   {
+    "hidden_index": 23,
+    "auc": 0.81531
+   },
+   {
+    "hidden_index": 24,
+    "auc": 0.8189639999999998
+   },
+   {
+    "hidden_index": 25,
+    "auc": 0.812773
+   },
+   {
+    "hidden_index": 26,
+    "auc": 0.812757
+   },
+   {
+    "hidden_index": 27,
+    "auc": 0.8115309999999999
+   },
+   {
+    "hidden_index": 28,
+    "auc": 0.804708
+   },
+   {
+    "hidden_index": 29,
+    "auc": 0.801006
+   },
+   {
+    "hidden_index": 30,
+    "auc": 0.795542
+   },
+   {
+    "hidden_index": 31,
+    "auc": 0.8039700000000001
+   },
+   {
+    "hidden_index": 32,
+    "auc": 0.802899
+   }
+  ],
+  "best_hidden_index": 20,
+  "best_auc": 0.8202649999999999,
+  "best_ci95": [
+   0.801412475,
+   0.8382327500000001
+  ],
+  "site": 20,
+  "site_auc": 0.8202649999999999,
+  "probe_minus_tfidf_ci95": [
+   -0.04204977500000006,
+   -0.004659849999999925
+  ],
+  "shuffled_label_null": {
+   "observed": 0.8202649999999999,
+   "null_mean": 0.5003488,
+   "null_sd": 0.011138792751261496,
+   "z": 28.720904243753758,
+   "p": 1.0459851313004515e-181,
+   "p_empirical": 0.09090909090909091,
+   "n_draws": 10
+  },
+  "pass": false
+ },
+ "note": "NO-GO: causal rungs not run (use --force-ladder to run them anyway).",
+ "runtime_min": 57.74
+}

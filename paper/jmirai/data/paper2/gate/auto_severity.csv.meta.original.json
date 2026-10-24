@@ -1,0 +1,8 @@
+{
+ "model": "Qwen/Qwen2.5-32B-Instruct",
+ "revision": null,
+ "n_posts": 2000,
+ "torch": "2.11.0+cu130",
+ "transformers": "5.20.2",
+ "max_chars": 6000
+}

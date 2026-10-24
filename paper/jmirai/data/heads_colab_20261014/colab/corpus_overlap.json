@@ -1,0 +1,106 @@
+{
+  "exact": {
+    "SDCNL": {
+      "n": 174436,
+      "exact_in_232K": 426,
+      "within_corpus_duplicates": 168
+    },
+    "SWMH": {
+      "n": 54412,
+      "exact_in_232K": 0,
+      "within_corpus_duplicates": 166
+    }
+  },
+  "near": {
+    "SDCNL": {
+      "n_checked": 20000,
+      "near_dup_in_232K": 5
+    },
+    "SWMH": {
+      "n_checked": 20000,
+      "near_dup_in_232K": 0
+    }
+  },
+  "eval_samples": {
+    "SDCNL/suicide": {
+      "n_500": 500,
+      "first80": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      },
+      "first120": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      },
+      "first500": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      }
+    },
+    "SDCNL/non_suicide": {
+      "n_500": 500,
+      "first80": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      },
+      "first120": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      },
+      "first500": {
+        "exact_232K": 1,
+        "near_232K": 0,
+        "near_direction_train": 0
+      }
+    },
+    "SWMH/suicide": {
+      "n_500": 500,
+      "first80": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      },
+      "first120": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      },
+      "first500": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      }
+    },
+    "SWMH/non_suicide": {
+      "n_500": 500,
+      "first80": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      },
+      "first120": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      },
+      "first500": {
+        "exact_232K": 0,
+        "near_232K": 0,
+        "near_direction_train": 0
+      }
+    }
+  },
+  "flagged_eval_hashes": [
+    "8859eb76aa8d84b4"
+  ],
+  "env": {
+    "seed": 0,
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision_requested": "0e9e39f249a16976918f6564b8830bc894c89659"
+  }
+}

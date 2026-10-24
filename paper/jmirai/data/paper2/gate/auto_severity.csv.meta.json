@@ -1,0 +1,10 @@
+{
+ "model": "Qwen/Qwen2.5-32B-Instruct",
+ "revision": "5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd",
+ "n_posts": 2000,
+ "torch": "2.11.0+cu130",
+ "transformers": "5.20.2",
+ "max_chars": 6000,
+ "revision_note": "Not captured at run time (transformers 5.20 left model.config._commit_hash empty). Inferred: this is the only commit on main from 2024-09-25 through the 2026-10-22 run, per the HF commits API.",
+ "run": "Google Colab, notebook relabel/severity_rater_colab.ipynb, 2026-10-22"
+}

@@ -1,0 +1,166 @@
+{
+ "window": [
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17
+ ],
+ "concepts": {
+  "suicide": {
+   "derivatives": {
+    "on": 25.83162511885166,
+    "neg": -21.955185644328594,
+    "off_food": 2.699634444899857,
+    "off_weather": 1.6377536952495575,
+    "off_programming": 2.360249411314726,
+    "nt_french": 2.691886194050312,
+    "nt_caps": 8.750382259488106,
+    "nt_long": 2.277810846688226
+   },
+   "pred_generic_ratio": 0.17704498829245638,
+   "pred_off_ratio": 0.08642684462228267,
+   "pred_neg_ratio": -0.8499343554001145
+  },
+  "toxicity": {
+   "derivatives": {
+    "on": 21.603118933737278,
+    "neg": -9.891493337228894,
+    "off_food": -0.24385161616373807,
+    "off_weather": 0.20914515608455986,
+    "off_programming": 0.3373116027796641,
+    "nt_french": 0.20452611683867872,
+    "nt_caps": 6.092715226113796,
+    "nt_long": -1.000276181846857
+   },
+   "pred_generic_ratio": 0.08173148789846613,
+   "pred_off_ratio": 0.004669158245601161,
+   "pred_neg_ratio": -0.4578733916879702
+  },
+  "sentiment": {
+   "derivatives": {
+    "on": 4.681258075986989,
+    "neg": -14.416667068377137,
+    "off_food": 0.058394090039655566,
+    "off_weather": -0.07723350892774761,
+    "off_programming": 0.4436051812954247,
+    "nt_french": 2.1524958312511444,
+    "nt_caps": 3.6936414279043674,
+    "nt_long": 0.48641506186686456
+   },
+   "pred_generic_ratio": 0.4509152752124389,
+   "pred_off_ratio": 0.030245841004879565,
+   "pred_neg_ratio": -3.0796565441091497
+  },
+  "sports": {
+   "derivatives": {
+    "on": 0.7115415893495083,
+    "neg": -14.822135493159294,
+    "off_food": -0.21512260218150914,
+    "off_weather": 0.24477578059304506,
+    "off_programming": 1.939661140087992,
+    "nt_french": 2.3007826693356037,
+    "nt_caps": 12.057322889566422,
+    "nt_long": -0.6473162790643983
+   },
+   "pred_generic_ratio": 6.423044220728329,
+   "pred_off_ratio": 0.9225576073025126,
+   "pred_neg_ratio": -20.83101777186306
+  },
+  "business": {
+   "derivatives": {
+    "on": 8.763306435197592,
+    "neg": -15.151037961244583,
+    "off_food": -0.10779175907373428,
+    "off_weather": 0.4230388274881989,
+    "off_programming": 1.7061875644139946,
+    "nt_french": 0.8035320499911904,
+    "nt_caps": 6.184424266219139,
+    "nt_long": -0.8750637928023934
+   },
+   "pred_generic_ratio": 0.2325184970083766,
+   "pred_off_ratio": 0.07689010412437554,
+   "pred_neg_ratio": -1.7289179687236353
+  },
+  "refusal": {
+   "derivatives": {
+    "on": 1.0485190129838884,
+    "neg": -23.37737548351288,
+    "off_food": 0.515818340703845,
+    "off_weather": 3.719773070886731,
+    "off_programming": 4.295038776472211,
+    "nt_french": 2.5139521807432175,
+    "nt_caps": 9.391731329262257,
+    "nt_long": -0.18575469404459
+   },
+   "pred_generic_ratio": 3.725867523885957,
+   "pred_off_ratio": 2.711961691499268,
+   "pred_neg_ratio": -22.295614284556706
+  },
+  "truth": {
+   "derivatives": {
+    "on": 1.0052288665319793,
+    "neg": -20.940542548894882,
+    "off_food": -0.3730515430215746,
+    "off_weather": 0.5707513922825456,
+    "off_programming": -1.2389733660966158,
+    "nt_french": -0.6964328442700207,
+    "nt_caps": 3.9208066798746586,
+    "nt_long": -3.8531920835375786
+   },
+   "pred_generic_ratio": -0.208515781453283,
+   "pred_off_ratio": -0.345285719336738,
+   "pred_neg_ratio": -20.831616804976324
+  },
+  "anger": {
+   "derivatives": {
+    "on": 3.120077658444643,
+    "neg": -6.580463908612728,
+    "off_food": 0.4156957939849235,
+    "off_weather": 0.3386254229117185,
+    "off_programming": 0.26025144261075184,
+    "nt_french": 0.2199771790765226,
+    "nt_caps": 2.907371986657381,
+    "nt_long": -0.6280973851680756
+   },
+   "pred_generic_ratio": 0.2670074331645219,
+   "pred_off_ratio": 0.10839181697517508,
+   "pred_neg_ratio": -2.109070551754499
+  }
+ },
+ "pred_median_generic_ratio": 0.24976296508644924,
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "mode": "steer",
+ "config": {
+  "mode": "steer",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "dtype": "float16",
+  "concept": "suicide",
+  "concepts": "suicide,toxicity,sentiment,sports,business,refusal,truth,anger",
+  "site": null,
+  "n_fit": 300,
+  "n_val": 150,
+  "n_null": 10,
+  "n_boot": 20,
+  "k_max": 8,
+  "n_scan": 32,
+  "no_scan": false,
+  "site_frac": 0.8,
+  "pca_m": 256,
+  "n_steer_fit": 500,
+  "n_steer": 200,
+  "n_items": 64,
+  "half_window": 4,
+  "batch": 2,
+  "seed": 0,
+  "out_dir": "/mnt/nas/MI on suicide-Nafiz Ahmed(revision)/results/gsa",
+  "smoke": false
+ },
+ "runtime_min": 37.53,
+ "script_sha256": "0c04b99b87249bf25ff395c51c9d31fabc79033e8781eb3bb476c8a73fcf9b6f",
+ "finished_utc": "2026-10-07T09:46:34Z"
+}

@@ -1,0 +1,48 @@
+{
+  "manuscript_100pc": {
+    "n_truncated_under_protocol": 16,
+    "auc": {
+      "baseline": 0.97645,
+      "direction": 0.837,
+      "random0": 0.97635
+    },
+    "drop_direction": 0.13945000000000007,
+    "drop_direction_ci95": [
+      0.08934875000000005,
+      0.19540375
+    ],
+    "drop_random": 9.999999999998899e-05,
+    "drop_random_ci95": [
+      -0.0006999999999999257,
+      0.0009000000000000119
+    ]
+  },
+  "rerun_200pc": {
+    "n_truncated_under_protocol": 42,
+    "auc": {
+      "baseline": 0.9697125,
+      "direction": 0.839975,
+      "random0": 0.9698125
+    },
+    "drop_direction": 0.12973749999999995,
+    "drop_direction_ci95": [
+      0.09628656249999996,
+      0.16608218749999992
+    ],
+    "drop_random": -9.999999999998899e-05,
+    "drop_random_ci95": [
+      -0.0004999999999999478,
+      0.00024999999999997247
+    ]
+  },
+  "env": {
+    "seed": 0,
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision_requested": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "revision_resolved": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "precision": "fp16",
+    "transformers": "4.56.2",
+    "torch": "2.11.0+cu130",
+    "gpu": "NVIDIA A100-SXM4-80GB"
+  }
+}

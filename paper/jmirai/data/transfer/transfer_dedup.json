@@ -1,0 +1,90 @@
+{
+  "SDCNL": {
+    "flags": {
+      "suicide": {
+        "flagged_first80": 34,
+        "flagged_first120": 54,
+        "flagged_of_500": 199,
+        "flagged_direction_fit_posts": 0
+      },
+      "non_suicide": {
+        "flagged_first80": 15,
+        "flagged_first120": 19,
+        "flagged_of_500": 90,
+        "flagged_direction_fit_posts": 1
+      }
+    },
+    "n_per_class_decoding": [
+      120,
+      120
+    ],
+    "decoding_transfer_auc": 0.9648611111111111,
+    "behavioral_auc_120": 0.9625,
+    "n_per_class_causal": [
+      80,
+      80
+    ],
+    "causal": {
+      "baseline": 0.961171875,
+      "ablate_232K_dirs": 0.714921875,
+      "random": 0.963125,
+      "drop_ci95": [
+        0.16959179687499995,
+        0.32868359375
+      ],
+      "random_drop_ci95": [
+        -0.007187500000000013,
+        0.002187500000000009
+      ]
+    }
+  },
+  "SWMH": {
+    "flags": {
+      "suicide": {
+        "flagged_first80": 8,
+        "flagged_first120": 13,
+        "flagged_of_500": 74,
+        "flagged_direction_fit_posts": 0
+      },
+      "non_suicide": {
+        "flagged_first80": 0,
+        "flagged_first120": 1,
+        "flagged_of_500": 3,
+        "flagged_direction_fit_posts": 0
+      }
+    },
+    "n_per_class_decoding": [
+      120,
+      120
+    ],
+    "decoding_transfer_auc": 0.9272916666666666,
+    "behavioral_auc_120": 0.9410416666666667,
+    "n_per_class_causal": [
+      80,
+      80
+    ],
+    "causal": {
+      "baseline": 0.942109375,
+      "ablate_232K_dirs": 0.745,
+      "random": 0.940234375,
+      "drop_ci95": [
+        0.113275390625,
+        0.28588476562499987
+      ],
+      "random_drop_ci95": [
+        -0.002267578125000047,
+        0.006408203125000045
+      ]
+    }
+  },
+  "env": {
+    "seed": 0,
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision_requested": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "revision_resolved": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "precision": "fp16",
+    "transformers": "4.56.2",
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA GeForce RTX 3090"
+  }
+}

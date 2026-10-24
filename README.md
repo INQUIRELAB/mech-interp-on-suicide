@@ -252,6 +252,27 @@ otherwise CUDA numbers GPUs differently from `nvidia-smi`. The fp16 SAE and DLA 
 from `sc2_sae.py` and `sc2_direct_logit_attribution.py` run with `MI_PRECISION=fp16`. The data
 bundle is not included because it contains corpus text that must not be redistributed.
 
+### Audit study (JMIR AI paper)
+
+Code for the revised paper, in `analysis/audit/`. Result files and figure scripts are in `paper/jmirai/`.
+
+| Path | Produces |
+| --- | --- |
+| `analysis/audit/run_audit.py` | Evidence ladder for one concept, model and seed: decodability, necessity, steering |
+| `analysis/audit/matched_prompts.py` | Register-matched SWMH set (suicide vs. depression): 7 prompts x 4 models against TF-IDF; `--body-tokens 4096` for full posts |
+| `analysis/audit/fulltext_summary.py` | Summary of the full-post runs |
+| `analysis/audit/tfidf_truncation.py`, `tfidf_truncation_232k.py` | TF-IDF refit on the same truncated text the models saw |
+| `analysis/audit/threshold_calibration.py` | Sensitivity and specificity at the default answer and at calibrated thresholds |
+| `analysis/audit/umd_keyword_baseline.py` | Clinician-rated risk on UMD users (needs access to the UMD dataset) |
+| `analysis/audit/yes_bias_audit.py` | Yes-bias correction and the UMD full-text rerun |
+| `analysis/audit/intent_minpairs_audit.py` | Minimal pairs: denial, third person, topical, fiction, past |
+| `analysis/audit/rank_ident.py`, `planted_rank_sim.py`, `gsa_lm.py` | Rank of the direction and whether it is identified |
+| `analysis/audit/steering_mech.py`, `sae_shared.py`, `repro_tigges.py` | Steering, SAE features, sentiment positive control |
+| `paper/jmirai/make_jmirai_figures.py`, `make_jmirai_extra_figures.py`, `make_fig_overview_jmirai.py`, `make_fig_headmap.py` | Figures |
+| `paper/jmirai/make_appendix_tables.py` | Appendix tables |
+
+The `run_*.sh` files show the exact commands used for the multi-model runs.
+
 ### Figures
 
 ```bash
@@ -300,6 +321,7 @@ folding and centering disabled, since those corrupt quantized weights.
 
 ```
 analysis/
+  audit/             audit study code (JMIR AI paper)
   sanity/            per-claim experiment scripts (sc1-sc4, see table above)
     gcl/             generalized concept ladder: multi-concept driver and comparisons
     rerun_all_sc2.py sequential driver for the full binary-task suite
@@ -316,6 +338,7 @@ src/
 utilities/           dataset download/caching, annotation helpers, table generation
 paper/
   make_figures.py    renders all figures from result files
+  jmirai/            JMIR AI paper: figure and table scripts, result files in data/
 results/             result files written by the scripts (created on first run)
 environment.yml      conda environment specification
 requirements.txt     pinned package versions (single source of truth)

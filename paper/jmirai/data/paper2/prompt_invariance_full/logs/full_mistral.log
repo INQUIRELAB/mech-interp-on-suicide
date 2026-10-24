@@ -1,0 +1,12 @@
+[14:55:47] suicide_depression: fit 2000/2000, eval 1000/1000
+[14:55:48] TF-IDF AUC 0.843
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:00<00:01,  1.17it/s]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.73s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.82s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.71s/it]
+[14:55:56] body budget 4096 tokens: 1 of 2000 eval posts truncated (879 exceed 176)
+[14:56:55] base      AUC 0.810 [0.791, 0.828] vs TF-IDF diff [-0.053, -0.014]; stack 0.855 vs TF-IDF 0.843 (gain CI [0.005, 0.019])
+[14:57:54] neg_flip  AUC 0.789 [0.769, 0.807] vs TF-IDF diff [-0.075, -0.035]; stack 0.858 vs TF-IDF 0.843 (gain CI [0.008, 0.024])
+[14:59:01] clinical  AUC 0.842 [0.824, 0.858] vs TF-IDF diff [-0.019, 0.015]; stack 0.865 vs TF-IDF 0.843 (gain CI [0.013, 0.031])
+[14:59:59] contrast  AUC 0.853 [0.836, 0.869] vs TF-IDF diff [-0.007, 0.027]; stack 0.870 vs TF-IDF 0.843 (gain CI [0.017, 0.036])
+[15:00:58] escalate  AUC 0.746 [0.724, 0.767] vs TF-IDF diff [-0.12, -0.074]; stack 0.850 vs TF-IDF 0.843 (gain CI [0.002, 0.012])
+[15:03:39] fewshot   AUC 0.810 [0.791, 0.828] vs TF-IDF diff [-0.054, -0.014]; stack 0.868 vs TF-IDF 0.843 (gain CI [0.016, 0.034])
+[15:04:38] rating    AUC 0.816 [0.797, 0.834] vs TF-IDF diff [-0.046, -0.009]; stack 0.860 vs TF-IDF 0.843 (gain CI [0.008, 0.025])
+[15:04:38] saved /root/rev_full/results/prompt_invariance_full/suicide_depression__mistral_7b_instruct_v0_3__seed0_full.json (8.85 min)

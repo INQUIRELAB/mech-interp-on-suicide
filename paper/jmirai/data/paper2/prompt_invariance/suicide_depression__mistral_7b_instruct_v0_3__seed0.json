@@ -1,0 +1,174 @@
+{
+ "model": "mistralai/Mistral-7B-Instruct-v0.3",
+ "model_tag": "mistral_7b_instruct_v0_3",
+ "concept": "suicide_depression",
+ "config": {
+  "model": "mistralai/Mistral-7B-Instruct-v0.3",
+  "dtype": "float16",
+  "concept": "suicide_depression",
+  "n_fit": 2000,
+  "n_eval": 1000,
+  "variants": "base,neg_flip,clinical,contrast,escalate,fewshot,rating",
+  "batch": 8,
+  "seed": 0,
+  "out_dir": "/mnt/nas/MI on suicide-Nafiz Ahmed(revision)/results/paper2/prompt_invariance",
+  "smoke": false
+ },
+ "n_eval_per_class": 1000,
+ "tfidf_auc": 0.843187,
+ "tfidf_ci95": [
+  0.826493825,
+  0.8597212249999999
+ ],
+ "variants": {
+  "base": {
+   "auc": 0.7858944999999999,
+   "ci95": [
+    0.7660028125,
+    0.8052946375000001
+   ],
+   "minus_tfidf_ci95": [
+    -0.0773783499999999,
+    -0.03721941250000018
+   ],
+   "stack_cv_auc": 0.8548830000000001,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.004705799999999885,
+    0.01927290000000002
+   ],
+   "score_mean_pos": 15.743874549865723,
+   "score_mean_neg": 5.100468635559082,
+   "frac_yes_pos": 0.93,
+   "frac_yes_neg": 0.643
+  },
+  "neg_flip": {
+   "auc": 0.7601450000000001,
+   "ci95": [
+    0.7389497125,
+    0.7794083624999999
+   ],
+   "minus_tfidf_ci95": [
+    -0.10343862499999985,
+    -0.06255156250000007
+   ],
+   "stack_cv_auc": 0.8523059999999999,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.0029623499999999413,
+    0.015896375000000063
+   ],
+   "score_mean_pos": 7.1779608726501465,
+   "score_mean_neg": 1.3976562023162842,
+   "frac_yes_pos": 0.937,
+   "frac_yes_neg": 0.694
+  },
+  "clinical": {
+   "auc": 0.815229,
+   "ci95": [
+    0.7964316625,
+    0.8330461625000001
+   ],
+   "minus_tfidf_ci95": [
+    -0.04669290000000007,
+    -0.010095925000000028
+   ],
+   "stack_cv_auc": 0.863196,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.011510775000000046,
+    0.029297375000000014
+   ],
+   "score_mean_pos": 13.685070037841797,
+   "score_mean_neg": -1.2917578220367432,
+   "frac_yes_pos": 0.867,
+   "frac_yes_neg": 0.418
+  },
+  "contrast": {
+   "auc": 0.829923,
+   "ci95": [
+    0.8114110375,
+    0.8468978625
+   ],
+   "minus_tfidf_ci95": [
+    -0.030777325000000143,
+    0.003945499999999938
+   ],
+   "stack_cv_auc": 0.866571,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.014062099999999966,
+    0.033004524999999924
+   ],
+   "score_mean_pos": 12.806023597717285,
+   "score_mean_neg": 0.0517890639603138,
+   "frac_yes_pos": 0.902,
+   "frac_yes_neg": 0.44
+  },
+  "escalate": {
+   "auc": 0.7591370000000001,
+   "ci95": [
+    0.7373132874999999,
+    0.7795261124999999
+   ],
+   "minus_tfidf_ci95": [
+    -0.10600707499999992,
+    -0.06157740000000016
+   ],
+   "stack_cv_auc": 0.852481,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.0037756250000001075,
+    0.015074025000000036
+   ],
+   "score_mean_pos": 18.281288146972656,
+   "score_mean_neg": 14.343640327453613,
+   "frac_yes_pos": 0.996,
+   "frac_yes_neg": 0.923
+  },
+  "fewshot": {
+   "auc": 0.789454,
+   "ci95": [
+    0.7690300499999999,
+    0.80880515
+   ],
+   "minus_tfidf_ci95": [
+    -0.07435756250000014,
+    -0.03195620000000004
+   ],
+   "stack_cv_auc": 0.863205,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.011655274999999996,
+    0.029009449999999954
+   ],
+   "score_mean_pos": 11.492375373840332,
+   "score_mean_neg": 4.454976558685303,
+   "frac_yes_pos": 0.953,
+   "frac_yes_neg": 0.681
+  },
+  "rating": {
+   "auc": 0.7873389999999999,
+   "ci95": [
+    0.76654735,
+    0.8069374
+   ],
+   "minus_tfidf_ci95": [
+    -0.07556422499999996,
+    -0.03596880000000003
+   ],
+   "stack_cv_auc": 0.8558520000000001,
+   "tfidf_cv_auc": 0.8428880000000001,
+   "stack_minus_tfidf_ci95": [
+    0.005372974999999855,
+    0.020408174999999876
+   ],
+   "score_mean_pos": 4.04190338036677,
+   "score_mean_neg": 3.174327629183799,
+   "frac_yes_pos": null,
+   "frac_yes_neg": null
+  }
+ },
+ "tfidf_cv_auc": 0.8428880000000001,
+ "runtime_min": 13.96
+}

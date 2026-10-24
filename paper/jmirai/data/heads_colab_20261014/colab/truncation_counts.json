@@ -1,0 +1,117 @@
+{
+  "direction_train (100/class)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      100,
+      100
+    ],
+    "truncated_suicide": 16,
+    "truncated_non_suicide": 2,
+    "subset_of_direction_train": true
+  },
+  "ablation_test_manuscript (100/class)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      100,
+      100
+    ],
+    "truncated_suicide": 13,
+    "truncated_non_suicide": 3,
+    "subset_of_direction_train": false
+  },
+  "ablation_test_rerun (200/class)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      200,
+      200
+    ],
+    "truncated_suicide": 36,
+    "truncated_non_suicide": 6,
+    "subset_of_direction_train": false
+  },
+  "head_knockout_fp16 (sc2_head_knockout --n 60)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      60,
+      60
+    ],
+    "truncated_suicide": 10,
+    "truncated_non_suicide": 2,
+    "subset_of_direction_train": true
+  },
+  "layer_patching_fp16 (sc2_patching --n 20)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      20,
+      20
+    ],
+    "truncated_suicide": 5,
+    "truncated_non_suicide": 0,
+    "subset_of_direction_train": true
+  },
+  "edge_attribution_fp16 (n=30, maxlen=200)": {
+    "body_cap_tokens": 120,
+    "n_per_class": [
+      30,
+      30
+    ],
+    "truncated_suicide": 12,
+    "truncated_non_suicide": 0,
+    "subset_of_direction_train": true
+  },
+  "internal_monitor_eval (1000/class)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      1000,
+      1000
+    ],
+    "truncated_suicide": 168,
+    "truncated_non_suicide": 36,
+    "subset_of_direction_train": false
+  },
+  "crossablation SDCNL (80/class)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      80,
+      80
+    ],
+    "truncated_suicide": 7,
+    "truncated_non_suicide": 3,
+    "subset_of_direction_train": false
+  },
+  "crossablation SWMH (80/class)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      80,
+      80
+    ],
+    "truncated_suicide": 37,
+    "truncated_non_suicide": 32,
+    "subset_of_direction_train": false
+  },
+  "generalization SDCNL (120/class)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      120,
+      120
+    ],
+    "truncated_suicide": 10,
+    "truncated_non_suicide": 4,
+    "subset_of_direction_train": false
+  },
+  "generalization SWMH (120/class)": {
+    "body_cap_tokens": 176,
+    "n_per_class": [
+      120,
+      120
+    ],
+    "truncated_suicide": 58,
+    "truncated_non_suicide": 52,
+    "subset_of_direction_train": false
+  },
+  "env": {
+    "seed": 0,
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision_requested": "0e9e39f249a16976918f6564b8830bc894c89659"
+  }
+}

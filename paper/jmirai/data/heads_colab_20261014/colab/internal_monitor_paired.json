@@ -1,0 +1,19 @@
+{
+  "alarm_count": 839,
+  "tp_model": 796,
+  "tp_probe": 807,
+  "net_tp": 11,
+  "recall_diff": 0.011,
+  "recall_diff_ci95": [
+    -0.001,
+    0.022
+  ],
+  "discordant_probe_only": 93,
+  "discordant_model_only": 82,
+  "mcnemar_exact_p": 0.4497860825989254,
+  "env": {
+    "seed": 0,
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision_requested": "0e9e39f249a16976918f6564b8830bc894c89659"
+  }
+}
