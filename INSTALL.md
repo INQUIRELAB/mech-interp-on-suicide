@@ -1,7 +1,7 @@
 # Installation and setup
 
-Full setup for reproducing the results in *Suicidality detection in large language models
-depends on a four-dimensional semantic subspace*. For what each script reproduces, see the
+Full setup for reproducing the results in *What Large Language Model Suicide Screening
+Measures on Reddit Benchmarks: Behavioral and Mechanistic Audit Study*. For what each script reproduces, see the
 tables in [README.md](README.md#reproducing-each-result).
 
 Setup is four steps: environment, credentials, data, verification. Budget about 20 minutes

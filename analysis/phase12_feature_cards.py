@@ -10,7 +10,7 @@ Part A — Feature Cards
     * top-K activating examples with token-level activation highlights
     * cosine similarity to the "safety direction"
     * causal effect magnitude (from phase 8 causal validation)
-  These cards mirror Anthropic-style feature browsers and make learned
+  These cards follow the layout of public SAE feature browsers and make learned
   features legible to non-technical reviewers.
 
 Part B — Circuit Faithfulness / Necessity / Minimality

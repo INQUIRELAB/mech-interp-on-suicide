@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite the paper below."
-title: "Suicidality detection in large language models depends on a four-dimensional semantic subspace"
+title: "What Large Language Model Suicide Screening Measures on Reddit Benchmarks: Behavioral and Mechanistic Audit Study"
 abstract: >-
   Analysis code and per-claim result files for a causal, cross-model account of
   how large language models detect suicidal content.

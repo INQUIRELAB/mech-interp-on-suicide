@@ -1,4 +1,4 @@
-# Suicidality detection in large language models depends on a four-dimensional semantic subspace
+# What Large Language Model Suicide Screening Measures on Reddit Benchmarks: Behavioral and Mechanistic Audit Study
 
 [![License: Noncommercial](https://img.shields.io/badge/License-Noncommercial-blue.svg)](LICENSE)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](INSTALL.md)
@@ -10,7 +10,14 @@ School of Psychology, Georgia Institute of Technology, Atlanta, Georgia, United 
 *Corresponding author: bana@ou.edu
 
 Code and per-claim result files for the paper of the same name
-(Ahmed, Sharif, Shi & Banad).
+(Ahmed, Sharif, Shi & Banad; preprint [arXiv:2606.21078](https://arxiv.org/abs/2606.21078)).
+
+> **Revised claims.** Earlier versions of this paper were titled "Suicidality detection in large language
+> models depends on a four-dimensional semantic subspace." Larger-sample reruns and corrected controls do not
+> support that title. The suicide direction does not beat a TF-IDF keyword baseline on register-matched data,
+> its rank is not identified, and its necessity does not replicate in Mistral. Rows in the tables below that
+> belong to the earlier framing are marked *superseded*. The current paper lists every revised claim
+> (Multimedia Appendix 1, section 6).
 
 Every number, table, and figure in the paper and its Supplementary Information is
 produced by one of the scripts below and written to a named result file. The mapping is
@@ -176,15 +183,15 @@ file. Paths are relative to the repository root. Run from the repository root.
 | --- | --- | --- |
 | Behavioral gate (232K) | `python analysis/sanity/sc2_binary_gate.py` | `results/sc2_binary/gate.json` |
 | Decodability (probe AUC by layer) | `python analysis/sanity/sc2b_probe_gate.py` | `results/sc2_binary/probe_gate.json` |
-| Semantic, not lexical (keyword masking) | `python analysis/sanity/sc3_surface_confounds.py` | `results/sc3/confounds.json` |
+| Keyword masking (superseded: no advantage over TF-IDF on matched register) | `python analysis/sanity/sc3_surface_confounds.py` | `results/sc3/confounds.json` |
 | Specificity (suicide vs. depression) | `python analysis/sanity/sc2_specificity.py` | `results/sc2_binary/specificity.json` |
 | Specificity, matched-negative ladder | `python analysis/sanity/gcl/run_gcl.py --concept suicide_depression` | `results/gcl/suicide_depression/llama_3_1_8b_instruct.json` |
 | Necessity (per-layer ablation) | `python analysis/sanity/sc2_faithfulness_perlayer.py` | `results/sc2_binary/faithfulness_perlayer.json` |
 | Necessity (single layer) | `python analysis/sanity/sc2_faithfulness.py` | `results/sc2_binary/faithfulness.json` |
-| Intrinsic dimension (rank-k sweep) | `python analysis/sanity/sc2_rankk.py` | `results/sc2_binary/rankk.json` |
+| Intrinsic dimension (rank-k sweep; superseded, rank not identified) | `python analysis/sanity/sc2_rankk.py` | `results/sc2_binary/rankk.json` |
 | Sufficiency (steering, not established) | `python analysis/sanity/sc2_sufficiency.py` | `results/sc2_binary/sufficiency.json` |
 | Steering salience confound (5 concepts) | `python analysis/sanity/gcl/steering_salience.py` | `results/gcl/steering_salience.json` |
-| Generalization (decode: SDCNL, SWMH) | `python analysis/sanity/sc2_generalization.py` | `results/sc2_binary/generalization.json` |
+| Generalization (decode: Kaggle-raw, SWMH) | `python analysis/sanity/sc2_generalization.py` | `results/sc2_binary/generalization.json` |
 | Generalization (causal: cross-ablation) | `python analysis/sanity/sc2_crossablation.py` | `results/sc2_binary/crossablation.json` |
 | Downstream detection metrics | `python analysis/sanity/sc2_downstream_table.py` | `results/sc2_binary/downstream_table.json` |
 | Cross-model (Qwen) | `python analysis/sanity/sc2_secondmodel.py qwen` | `results/sc2_binary/secondmodel_qwen.json` |
@@ -341,8 +348,9 @@ Noncommercial use, modification, and redistribution are permitted under the appl
 
 ```bibtex
 @article{ahmed2026suicidality,
-  title={Suicidality detection in large language models depends on a four-dimensional semantic subspace},
+  title={What Large Language Model Suicide Screening Measures on Reddit Benchmarks: Behavioral and Mechanistic Audit Study},
   author={Ahmed, Nafiz and Sharif, Sarah S. and Shi, Dingjing and Banad, Yaser M.},
+  journal={arXiv preprint arXiv:2606.21078},
   year={2026}
 }
 ```
