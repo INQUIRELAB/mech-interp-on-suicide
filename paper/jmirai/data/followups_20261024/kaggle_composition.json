@@ -1,0 +1,40 @@
+{
+ "kaggle_rows": 174436,
+ "kaggle_columns": [
+  "class",
+  "text",
+  "cleaned_text"
+ ],
+ "kaggle_label_counts": {
+  "suicide": 67356,
+  "non-suicide": 107080
+ },
+ "swmh": {
+  "self.SuicideWatch": {
+   "n": 5780,
+   "full_text": {
+    "n_keyed": 5780,
+    "in_suicide": 434,
+    "share_in_suicide": 0.07508650519031142
+   },
+   "prefix25": {
+    "n_keyed": 5364,
+    "in_suicide": 433,
+    "share_in_suicide": 0.08072334079045489
+   }
+  },
+  "self.depression": {
+   "n": 10529,
+   "full_text": {
+    "n_keyed": 10529,
+    "in_suicide": 1,
+    "share_in_suicide": 9.497578117580017e-05
+   },
+   "prefix25": {
+    "n_keyed": 9473,
+    "in_suicide": 3,
+    "share_in_suicide": 0.0003166895386889053
+   }
+  }
+ }
+}

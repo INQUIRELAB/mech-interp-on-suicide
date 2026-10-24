@@ -1,0 +1,596 @@
+{
+ "model": "/root/rev_mech/models/Llama-3.1-8B-Instruct",
+ "model_tag": "llama_3_1_8b_instruct",
+ "site": 14,
+ "window": [
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18
+ ],
+ "config": {
+  "model": "/root/rev_mech/models/Llama-3.1-8B-Instruct",
+  "dtype": "float16",
+  "concepts": "suicide,suicide_depression,toxicity,sentiment,sports,business,refusal,truth,anger",
+  "n_fit": 500,
+  "n_steer": 200,
+  "n_yes": 300,
+  "n_ref": 48,
+  "kappas": "0.1",
+  "half_window": 4,
+  "site": null,
+  "batch": 16,
+  "seed": 0,
+  "out_dir": "/root/rev_mech/results/steering_post",
+  "followup": true,
+  "n_topic": 100,
+  "only_variants": "orig,minus_yes",
+  "fit_prompt": "post",
+  "smoke": false
+ },
+ "geometry": {
+  "suicide": {
+   "cos_yes": 0.026604214683175087,
+   "cos_shared": 0.44350001215934753,
+   "cos_topic": 0.11704729497432709,
+   "cos_topic_yes": 0.371429979801178,
+   "cos_topic_shared": 0.052167102694511414
+  },
+  "suicide_depression": {
+   "cos_yes": -0.07110438495874405,
+   "cos_shared": 0.7289252281188965,
+   "cos_topic": 0.07239571213722229,
+   "cos_topic_yes": 0.3703692555427551,
+   "cos_topic_shared": 0.05396582558751106
+  },
+  "toxicity": {
+   "cos_yes": -0.048939257860183716,
+   "cos_shared": 0.7977835536003113,
+   "cos_topic": 0.06678038835525513,
+   "cos_topic_yes": 0.36676841974258423,
+   "cos_topic_shared": 0.056390829384326935
+  },
+  "sentiment": {
+   "cos_yes": 0.02269572950899601,
+   "cos_shared": -0.4475381672382355,
+   "cos_topic": -0.04380614310503006,
+   "cos_topic_yes": 0.3517770767211914,
+   "cos_topic_shared": 0.08472099900245667
+  },
+  "sports": {
+   "cos_yes": -0.035077329725027084,
+   "cos_shared": 0.0060181813314557076,
+   "cos_topic": -0.07072705775499344,
+   "cos_topic_yes": 0.3244011700153351,
+   "cos_topic_shared": 0.09261181950569153
+  },
+  "business": {
+   "cos_yes": 0.03733987733721733,
+   "cos_shared": -0.12176685780286789,
+   "cos_topic": 0.037516720592975616,
+   "cos_topic_yes": 0.32688793540000916,
+   "cos_topic_shared": 0.09420578926801682
+  },
+  "refusal": {
+   "cos_yes": -0.11993680894374847,
+   "cos_shared": 0.7275261878967285,
+   "cos_topic": -0.03271818161010742,
+   "cos_topic_yes": 0.3659127652645111,
+   "cos_topic_shared": 0.03669936954975128
+  },
+  "truth": {
+   "cos_yes": 0.24916116893291473,
+   "cos_shared": -0.5255113244056702,
+   "cos_topic": 0.12605386972427368,
+   "cos_topic_yes": 0.3568517863750458,
+   "cos_topic_shared": 0.08497647196054459
+  },
+  "anger": {
+   "cos_yes": -0.07863067090511322,
+   "cos_shared": 0.5659906268119812,
+   "cos_topic": 0.0873882919549942,
+   "cos_topic_yes": 0.3607345223426819,
+   "cos_topic_shared": 0.07872894406318665
+  }
+ },
+ "pairwise_concept_cos": {
+  "suicide|suicide_depression": 0.4474667012691498,
+  "suicide|toxicity": 0.21968232095241547,
+  "suicide|sentiment": -0.1282496601343155,
+  "suicide|sports": -0.10766046494245529,
+  "suicide|business": 0.04566991701722145,
+  "suicide|refusal": 0.16385169327259064,
+  "suicide|truth": -0.04913407564163208,
+  "suicide|anger": 0.1731511950492859,
+  "suicide_depression|toxicity": 0.4694017767906189,
+  "suicide_depression|sentiment": -0.05132905766367912,
+  "suicide_depression|sports": -0.009826792404055595,
+  "suicide_depression|business": 0.005047513172030449,
+  "suicide_depression|refusal": 0.5553784966468811,
+  "suicide_depression|truth": -0.27030518651008606,
+  "suicide_depression|anger": 0.2197062373161316,
+  "toxicity|sentiment": -0.41086089611053467,
+  "toxicity|sports": 0.08217668533325195,
+  "toxicity|business": -0.17355595529079437,
+  "toxicity|refusal": 0.5006235837936401,
+  "toxicity|truth": -0.3103749454021454,
+  "toxicity|anger": 0.3418372869491577,
+  "sentiment|sports": 0.03270954266190529,
+  "sentiment|business": 0.09477032721042633,
+  "sentiment|refusal": -0.11291445791721344,
+  "sentiment|truth": 0.10676687955856323,
+  "sentiment|anger": -0.37068307399749756,
+  "sports|business": -0.6024710536003113,
+  "sports|refusal": -0.0356454998254776,
+  "sports|truth": -0.0782768726348877,
+  "sports|anger": -0.11835372447967529,
+  "business|refusal": -0.02221720851957798,
+  "business|truth": 0.06950283795595169,
+  "business|anger": 0.015519239939749241,
+  "refusal|truth": -0.34407874941825867,
+  "refusal|anger": 0.24104589223861694,
+  "truth|anger": -0.2309192270040512
+ },
+ "shared_pc1_explained_var": {
+  "10": 0.26211894779807265,
+  "11": 0.29901835618163236,
+  "12": 0.30927984086609484,
+  "13": 0.3285243875513216,
+  "14": 0.3318913631809901,
+  "15": 0.31424266040830573,
+  "16": 0.3103566264237678,
+  "17": 0.3014882040605197,
+  "18": 0.30443621281564887
+ },
+ "concepts": {
+  "suicide": {
+   "baseline": {
+    "on": 1.6625195741653442,
+    "neg": -1.4503905773162842,
+    "off_food": -6.888906478881836,
+    "off_weather": -7.041796684265137,
+    "off_programming": -3.335195302963257,
+    "nt_french": -3.680488348007202,
+    "nt_caps": 4.791132926940918,
+    "nt_long": -4.214921951293945,
+    "mc_t": -1.200659155845642,
+    "mc_o": -2.8668487071990967
+   },
+   "variants": {
+    "orig": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.09950102201980533,
+      "kl": 0.09860354661941528,
+      "on_shift": 1.222558617591858,
+      "off_shift": 0.2863476574420929,
+      "neg_shift": -0.49351561069488525,
+      "selectivity": 0.9362109303474426,
+      "polarity": 1.7160742282867432,
+      "mc_selectivity": 0.7386743426322937,
+      "flip_rate_vs_zero": 0.8,
+      "nontopic_shift": 0.6937370300292969,
+      "nontopic_flip": 0.34833333333333333
+     }
+    ],
+    "minus_yes": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.09950102201980533,
+      "kl": 0.10011151432991028,
+      "on_shift": 1.1453906297683716,
+      "off_shift": 0.22499999403953552,
+      "neg_shift": -0.5262304544448853,
+      "selectivity": 0.9203906059265137,
+      "polarity": 1.6716210842132568,
+      "mc_selectivity": 0.7265670895576477,
+      "flip_rate_vs_zero": 0.8,
+      "nontopic_shift": 0.62235027551651,
+      "nontopic_flip": 0.3466666666666666
+     }
+    ]
+   }
+  },
+  "suicide_depression": {
+   "baseline": {
+    "on": 4.669472694396973,
+    "neg": -2.7867188453674316,
+    "off_food": -6.494375228881836,
+    "off_weather": -6.961357593536377,
+    "off_programming": -6.3466796875,
+    "nt_french": -4.095937728881836,
+    "nt_caps": 0.8037499785423279,
+    "nt_long": -2.9716503620147705,
+    "mc_t": -0.4230162501335144,
+    "mc_o": -5.266448497772217
+   },
+   "variants": {
+    "orig": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.12892805142292926,
+      "kl": 0.1071259155869484,
+      "on_shift": -0.7951562404632568,
+      "off_shift": -0.9731380343437195,
+      "neg_shift": -1.507421851158142,
+      "selectivity": 0.17798177897930145,
+      "polarity": 0.7122656106948853,
+      "mc_selectivity": 0.7318850159645081,
+      "flip_rate_vs_zero": 0.815,
+      "nontopic_shift": -0.9827767014503479,
+      "nontopic_flip": 0.16
+     }
+    ],
+    "minus_yes": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.12892805142292926,
+      "kl": 0.09890533238649368,
+      "on_shift": -0.44203126430511475,
+      "off_shift": -0.6661295294761658,
+      "neg_shift": -1.349794864654541,
+      "selectivity": 0.2240983247756958,
+      "polarity": 0.907763659954071,
+      "mc_selectivity": 0.8207427859306335,
+      "flip_rate_vs_zero": 0.835,
+      "nontopic_shift": -0.5023763179779053,
+      "nontopic_flip": 0.19999999999999998
+     }
+    ]
+   }
+  },
+  "toxicity": {
+   "baseline": {
+    "on": 1.7200000286102295,
+    "neg": 5.422890663146973,
+    "off_food": -6.186327934265137,
+    "off_weather": -6.404453277587891,
+    "off_programming": -4.734023571014404,
+    "nt_french": -4.478769302368164,
+    "nt_caps": 0.09000000357627869,
+    "nt_long": -2.917167901992798,
+    "mc_t": -0.9969241619110107,
+    "mc_o": -3.820230007171631
+   },
+   "variants": {
+    "orig": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.16163445622494463,
+      "kl": 0.10226301103830338,
+      "on_shift": 0.010898437350988388,
+      "off_shift": -0.6259309649467468,
+      "neg_shift": -0.983105480670929,
+      "selectivity": 0.6368294358253479,
+      "polarity": 0.9940038919448853,
+      "mc_selectivity": 0.7702853679656982,
+      "flip_rate_vs_zero": 0.595,
+      "nontopic_shift": -0.28736329078674316,
+      "nontopic_flip": 0.19166666666666665
+     }
+    ],
+    "minus_yes": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.16163445622494463,
+      "kl": 0.09878412634134293,
+      "on_shift": 0.14097656309604645,
+      "off_shift": -0.5058919787406921,
+      "neg_shift": -0.8460937738418579,
+      "selectivity": 0.6468684673309326,
+      "polarity": 0.9870703220367432,
+      "mc_selectivity": 0.7944414615631104,
+      "flip_rate_vs_zero": 0.62,
+      "nontopic_shift": -0.10208984464406967,
+      "nontopic_flip": 0.20166666666666666
+     }
+    ]
+   }
+  },
+  "sentiment": {
+   "baseline": {
+    "on": -4.851230621337891,
+    "neg": 11.74087905883789,
+    "off_food": -6.68115234375,
+    "off_weather": -6.687792778015137,
+    "off_programming": -5.774472713470459,
+    "nt_french": -4.753515720367432,
+    "nt_caps": -0.14472655951976776,
+    "nt_long": -2.502187490463257,
+    "mc_t": -0.11022323369979858,
+    "mc_o": -6.011502265930176
+   },
+   "variants": {
+    "orig": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.28469370173765335,
+      "kl": 0.08766090869903564,
+      "on_shift": 1.2413281202316284,
+      "off_shift": 0.7061198353767395,
+      "neg_shift": -1.056210994720459,
+      "selectivity": 0.5352083444595337,
+      "polarity": 2.297538995742798,
+      "mc_selectivity": -0.3522336483001709,
+      "flip_rate_vs_zero": 0.11,
+      "nontopic_shift": 0.47321614623069763,
+      "nontopic_flip": 0.14333333333333334
+     }
+    ],
+    "minus_yes": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.28469370173765335,
+      "kl": 0.08756700903177261,
+      "on_shift": 1.2144726514816284,
+      "off_shift": 0.6925260424613953,
+      "neg_shift": -1.04736328125,
+      "selectivity": 0.5219466686248779,
+      "polarity": 2.261836051940918,
+      "mc_selectivity": -0.35929805040359497,
+      "flip_rate_vs_zero": 0.11,
+      "nontopic_shift": 0.4403255581855774,
+      "nontopic_flip": 0.13833333333333334
+     }
+    ]
+   }
+  },
+  "sports": {
+   "baseline": {
+    "on": -5.583632946014404,
+    "neg": 11.875312805175781,
+    "off_food": -6.764277458190918,
+    "off_weather": -6.474140644073486,
+    "off_programming": -5.22119140625,
+    "nt_french": -3.852792978286743,
+    "nt_caps": -0.5742577910423279,
+    "nt_long": -2.8187499046325684,
+    "mc_t": -2.6830124855041504,
+    "mc_o": -2.643045663833618
+   },
+   "variants": {
+    "orig": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.35602980326870676,
+      "kl": 0.10440656542778015,
+      "on_shift": 0.959179699420929,
+      "off_shift": 1.0129883289337158,
+      "neg_shift": -1.5959179401397705,
+      "selectivity": -0.05380859225988388,
+      "polarity": 2.5550975799560547,
+      "mc_selectivity": 0.18109169602394104,
+      "flip_rate_vs_zero": 0.02,
+      "nontopic_shift": 0.807324230670929,
+      "nontopic_flip": 0.18166666666666667
+     }
+    ],
+    "minus_yes": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.35602980326870676,
+      "kl": 0.10403784364461899,
+      "on_shift": 1.2426366806030273,
+      "off_shift": 1.3005077838897705,
+      "neg_shift": -1.4055664539337158,
+      "selectivity": -0.057871099561452866,
+      "polarity": 2.648203134536743,
+      "mc_selectivity": 0.18598005175590515,
+      "flip_rate_vs_zero": 0.025,
+      "nontopic_shift": 1.1648502349853516,
+      "nontopic_flip": 0.22833333333333336
+     }
+    ]
+   }
+  },
+  "business": {
+   "baseline": {
+    "on": 1.260195255279541,
+    "neg": 5.487734317779541,
+    "off_food": -6.855507850646973,
+    "off_weather": -6.369472503662109,
+    "off_programming": -4.944023609161377,
+    "nt_french": -3.8361523151397705,
+    "nt_caps": -0.21710938215255737,
+    "nt_long": -2.9501562118530273,
+    "mc_t": -0.5258979201316833,
+    "mc_o": -5.888264179229736
+   },
+   "variants": {
+    "orig": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.4325887144797215,
+      "kl": 0.09206409007310867,
+      "on_shift": 0.5794922113418579,
+      "off_shift": 0.19261068105697632,
+      "neg_shift": 0.2819140553474426,
+      "selectivity": 0.3868815302848816,
+      "polarity": 0.2975781261920929,
+      "mc_selectivity": 0.8196501731872559,
+      "flip_rate_vs_zero": 0.49,
+      "nontopic_shift": 0.4341471493244171,
+      "nontopic_flip": 0.18666666666666668
+     }
+    ],
+    "minus_yes": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.4325887144797215,
+      "kl": 0.08998379111289978,
+      "on_shift": 0.4475781321525574,
+      "off_shift": 0.09936848282814026,
+      "neg_shift": 0.25148436427116394,
+      "selectivity": 0.3482096195220947,
+      "polarity": 0.19609375298023224,
+      "mc_selectivity": 0.7683907151222229,
+      "flip_rate_vs_zero": 0.49,
+      "nontopic_shift": 0.2917187511920929,
+      "nontopic_flip": 0.17166666666666666
+     }
+    ]
+   }
+  },
+  "refusal": {
+   "baseline": {
+    "on": -2.9423046112060547,
+    "neg": 10.35904312133789,
+    "off_food": -5.488945484161377,
+    "off_weather": -5.688457012176514,
+    "off_programming": -1.3645702600479126,
+    "nt_french": -3.176210880279541,
+    "nt_caps": -1.0279101133346558,
+    "nt_long": -2.1099610328674316,
+    "mc_t": -3.765139102935791,
+    "mc_o": -2.4891841411590576
+   },
+   "variants": {
+    "orig": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.03673668298491202,
+      "kl": 0.1320950984954834,
+      "on_shift": -1.2817187309265137,
+      "off_shift": -1.1374934911727905,
+      "neg_shift": -0.3138085901737213,
+      "selectivity": -0.14422526955604553,
+      "polarity": -0.9679101705551147,
+      "mc_selectivity": -0.09903669357299805,
+      "flip_rate_vs_zero": 0.025,
+      "nontopic_shift": -1.2276368141174316,
+      "nontopic_flip": 0.035
+     }
+    ],
+    "minus_yes": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.04030134361785135,
+      "kl": 0.10516425967216492,
+      "on_shift": -0.9540234208106995,
+      "off_shift": -0.7354491949081421,
+      "neg_shift": 0.07123047113418579,
+      "selectivity": -0.21857422590255737,
+      "polarity": -1.0252538919448853,
+      "mc_selectivity": -0.11971664428710938,
+      "flip_rate_vs_zero": 0.03,
+      "nontopic_shift": -0.6079036593437195,
+      "nontopic_flip": 0.075
+     }
+    ]
+   }
+  },
+  "truth": {
+   "baseline": {
+    "on": -4.672245979309082,
+    "neg": 11.885527610778809,
+    "off_food": -7.094843864440918,
+    "off_weather": -5.559160232543945,
+    "off_programming": -6.523241996765137,
+    "nt_french": -2.890331983566284,
+    "nt_caps": -0.47328126430511475,
+    "nt_long": -5.26785135269165,
+    "mc_t": -0.0551651269197464,
+    "mc_o": -5.140059947967529
+   },
+   "variants": {
+    "orig": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.08772870458495749,
+      "kl": 0.10603287070989609,
+      "on_shift": 2.8795506954193115,
+      "off_shift": 2.7900390625,
+      "neg_shift": 1.907656192779541,
+      "selectivity": 0.08951172232627869,
+      "polarity": 0.9718945026397705,
+      "mc_selectivity": 1.0438841581344604,
+      "flip_rate_vs_zero": 0.045,
+      "nontopic_shift": 3.868997097015381,
+      "nontopic_flip": 0.5549999999999999
+     }
+    ],
+    "minus_yes": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.08772870458495749,
+      "kl": 0.09131147712469101,
+      "on_shift": 1.0511914491653442,
+      "off_shift": 0.7165949940681458,
+      "neg_shift": 0.9325390458106995,
+      "selectivity": 0.33459633588790894,
+      "polarity": 0.11865234375,
+      "mc_selectivity": 0.5911027193069458,
+      "flip_rate_vs_zero": 0.0,
+      "nontopic_shift": 1.3093750476837158,
+      "nontopic_flip": 0.36000000000000004
+     }
+    ]
+   }
+  },
+  "anger": {
+   "baseline": {
+    "on": -0.5694921612739563,
+    "neg": 3.179921865463257,
+    "off_food": -6.301386833190918,
+    "off_weather": -6.4375,
+    "off_programming": -5.425332069396973,
+    "nt_french": -2.8107030391693115,
+    "nt_caps": 0.054960936307907104,
+    "nt_long": -4.679746150970459,
+    "mc_t": -1.3608993291854858,
+    "mc_o": -3.033371686935425
+   },
+   "variants": {
+    "orig": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.547554071645532,
+      "kl": 0.09678126126527786,
+      "on_shift": 0.29722654819488525,
+      "off_shift": 0.07166015356779099,
+      "neg_shift": -0.5680859088897705,
+      "selectivity": 0.22556640207767487,
+      "polarity": 0.8653125166893005,
+      "mc_selectivity": 0.20657363533973694,
+      "flip_rate_vs_zero": 0.435,
+      "nontopic_shift": 0.2704557478427887,
+      "nontopic_flip": 0.215
+     }
+    ],
+    "minus_yes": [
+     {
+      "kappa": 0.1,
+      "alpha": 0.547554071645532,
+      "kl": 0.09067121148109436,
+      "on_shift": 0.6038671731948853,
+      "off_shift": 0.38127604126930237,
+      "neg_shift": -0.3900781273841858,
+      "selectivity": 0.22259113192558289,
+      "polarity": 0.993945300579071,
+      "mc_selectivity": 0.2491123229265213,
+      "flip_rate_vs_zero": 0.465,
+      "nontopic_shift": 0.6675520539283752,
+      "nontopic_flip": 0.26666666666666666
+     }
+    ]
+   }
+  }
+ },
+ "regression_at_kappa": {
+  "kappa": 0.1,
+  "spearman_offshift_vs_cos_yes": [
+   -0.3,
+   0.4328453267094823
+  ],
+  "spearman_offshift_vs_cos_shared": [
+   -0.7,
+   0.03576957497026169
+  ]
+ },
+ "runtime_min": 21.0
+}
