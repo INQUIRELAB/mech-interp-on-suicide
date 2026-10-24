@@ -15,9 +15,10 @@ Code and per-claim result files for the paper of the same name
 > **Revised claims.** Earlier versions of this paper were titled "Suicidality detection in large language
 > models depends on a four-dimensional semantic subspace." Larger-sample reruns and corrected controls do not
 > support that title. The suicide direction does not beat a TF-IDF keyword baseline on register-matched data,
-> its rank is not identified, and its necessity does not replicate in Mistral. Rows in the tables below that
-> belong to the earlier framing are marked *superseded*. The current paper lists every revised claim
-> (Multimedia Appendix 1, section 6).
+> its rank is not identified, and its necessity does not replicate in Mistral. Removing a content-free
+> answer-polarity direction also erases most of the suicide answer gap, so necessity of the direction does not
+> by itself show a suicide-specific mechanism. Rows in the tables below that belong to the earlier framing are
+> marked *superseded*. The current paper lists every revised claim (Multimedia Appendix 1, section 7).
 
 Every number, table, and figure in the paper and its Supplementary Information is
 produced by one of the scripts below and written to a named result file. The mapping is
@@ -258,20 +259,24 @@ Code for the revised paper, in `analysis/audit/`. Result files and figure script
 
 | Path | Produces |
 | --- | --- |
-| `analysis/audit/run_audit.py` | Evidence ladder for one concept, model and seed: decodability, necessity, steering |
+| `analysis/audit/run_audit.py` | Evidence ladder for one concept, model and seed: decodability, necessity, steering; `--concept suicide_depression` for the register-matched direction |
 | `analysis/audit/matched_prompts.py` | Register-matched SWMH set (suicide vs. depression): 7 prompts x 4 models against TF-IDF; `--body-tokens 4096` for full posts |
 | `analysis/audit/fulltext_summary.py` | Summary of the full-post runs |
 | `analysis/audit/tfidf_truncation.py`, `tfidf_truncation_232k.py` | TF-IDF refit on the same truncated text the models saw |
 | `analysis/audit/threshold_calibration.py` | Sensitivity and specificity at the default answer and at calibrated thresholds |
-| `analysis/audit/umd_keyword_baseline.py` | Clinician-rated risk on UMD users (needs access to the UMD dataset) |
+| `analysis/audit/umd_keyword_baseline.py` | Expert-rated risk on UMD users (needs access to the UMD dataset) |
 | `analysis/audit/yes_bias_audit.py` | Yes-bias correction and the UMD full-text rerun |
 | `analysis/audit/intent_minpairs_audit.py` | Minimal pairs: denial, third person, topical, fiction, past |
 | `analysis/audit/rank_ident.py`, `planted_rank_sim.py`, `gsa_lm.py` | Rank of the direction and whether it is identified |
-| `analysis/audit/steering_mech.py`, `sae_shared.py`, `repro_tigges.py` | Steering, SAE features, sentiment positive control |
+| `analysis/audit/steering_mech.py`, `sae_shared.py`, `repro_tigges.py` | Steering (`--fit-prompt post` fits directions on the text alone), SAE features, sentiment positive control |
+| `analysis/audit/offtarget_necessity.py` | Off-target necessity: each task's direction and an answer-polarity direction ablated at every layer or in the upper half; gap and AUC of every task |
+| `analysis/audit/swmh_followups.py` | Register-matched set: TF-IDF learning curve, duplicate audit, stacking control, calibration of the default answer |
+| `analysis/audit/kaggle_composition.py` | Which forums make up the two classes of Suicide-Watch-232K |
 | `paper/jmirai/make_jmirai_figures.py`, `make_jmirai_extra_figures.py`, `make_fig_overview_jmirai.py`, `make_fig_headmap.py` | Figures |
 | `paper/jmirai/make_appendix_tables.py` | Appendix tables |
 
-The `run_*.sh` files show the exact commands used for the multi-model runs.
+The `run_*.sh` files show the exact commands used for the multi-model runs; `run_followups.sh` covers the
+off-target necessity, follow-up steering and register-matched necessity runs.
 
 ### Figures
 

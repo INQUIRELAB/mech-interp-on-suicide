@@ -13,7 +13,6 @@ at commit 0e9e39f2, fp16); these reproduce the values earlier typed from ../npja
 Run:  python make_jmirai_extra_figures.py
 """
 import json
-from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
@@ -21,8 +20,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon, FancyArrowPatch
 import numpy as np
 
-import make_jmirai_figures as base   # rcParams, colours, markers, helpers
-from make_jmirai_figures import INK, INK2, CTRL, CTRL_LT, FAINT, RED, FULL, MODELS, MARK, D, panel, dot, save
+from make_jmirai_figures import INK, INK2, CTRL, FAINT, RED, FULL, MODELS, MARK, D, panel, dot, save  # also sets rcParams
 
 RED_LT = "#e9c3c5"
 
@@ -38,11 +36,13 @@ def fig_heads():
     proj_restored = [100 * w["patching"][x]["proj_ie_top"] for x in ks]   # joint patching, % of L16 projection
     gap_restored = [100 * w["patching"][x]["ld_ie_top"] for x in ks]      # joint patching, % of LD gap
     sep_left = [100 * w["knockout"]["mean"]["by_k"][x]["proj_gap_frac_remaining"] for x in ks]  # mean-ablation
-    # mean-ablation AUC by task, and the range over layer-matched random head sets on suicide
-    auc = {lab: ([0] + list(k), [spec[f"{t}/mean"]["baseline_auc"]] + [spec[f"{t}/mean"]["by_k"][x]["auc_top"] for x in ks])
-           for t, lab in [("suicidality", "suicide"), ("sentiment", "sentiment (SST-2)"), ("topic_sports", "sports (AG News)")]}
-    rand_lo = min(spec["suicidality/mean"]["by_k"][x]["auc_rand_range"][0] for x in ks)
-    rand_hi = max(spec["suicidality/mean"]["by_k"][x]["auc_rand_range"][1] for x in ks)
+    # mean-ablation: share of each task's logit-difference gap left, top-k heads and layer-matched random heads
+    tasks = [("suicidality", "suicide"), ("sentiment", "sentiment (SST-2)"), ("topic_sports", "sports (AG News)")]
+    left = {lab: ([0] + list(k), [100.0] + [100 * spec[f"{t}/mean"]["by_k"][x]["gap_top"] / spec[f"{t}/mean"]["baseline_gap"]
+                                            for x in ks]) for t, lab in tasks}
+    rand = np.array([[100 * spec[f"{t}/mean"]["by_k"][x]["gap_rand_mean"] / spec[f"{t}/mean"]["baseline_gap"] for x in ks]
+                     for t, _ in tasks])
+    rand_lo, rand_hi = np.r_[100.0, rand.min(0)], np.r_[100.0, rand.max(0)]
 
     fig = plt.figure(figsize=(FULL, 2.3))
     gs = fig.add_gridspec(1, 2, wspace=0.42)
@@ -55,7 +55,7 @@ def fig_heads():
     ax.plot(k, sep_left, "--", color=RED, lw=0.9, dashes=(3, 1.6))
     ax.plot(k, sep_left, "o", ms=3.2, color=RED, mfc="white", mew=0.7, zorder=4)
     ax.text(41.5, gap_restored[-1] + 4.5, "patch in: logit gap restored", ha="right", fontsize=5.8, color=INK)
-    ax.text(41.5, proj_restored[-1] - 9.5, "patch in: direction restored", ha="right", fontsize=5.8, color=RED)
+    ax.text(41.5, proj_restored[-1] - 9.5, "patch in: layer-16 projection restored", ha="right", fontsize=5.8, color=RED)
     ax.text(41.5, sep_left[-1] + 17, "ablate: direction left", ha="right", fontsize=5.8, color=RED)
     ax.text(41.5, sep_left[-1] + 12.2, "(random head sets: 75–100% left)", ha="right", fontsize=5.4, color=INK2)
     ax.text(41.5, proj_restored[-1] - 14.5, "(random head sets: below 0)", ha="right", fontsize=5.4, color=INK2)
@@ -63,25 +63,28 @@ def fig_heads():
     ax.set_ylim(0, 108); ax.set_yticks([0, 25, 50, 75, 100])
     ax.spines["left"].set_bounds(0, 100)
     ax.set_xlabel("top-$k$ heads (ranked by patching)")
-    ax.set_ylabel("% of effect at layer 16")
+    ax.set_ylabel("% of effect")
 
-    bx.axhspan(rand_lo, rand_hi, color=FAINT, lw=0, zorder=0)
-    bx.text(24, 0.983, "random head sets", fontsize=5.6, color=INK2, va="bottom")
-    bx.axhline(0.5, color=INK2, lw=0.5, ls=(0, (3, 2)))
-    bx.text(1.0, 0.505, "chance", fontsize=5.6, color=INK2, ha="left", va="bottom")
+    xr = np.r_[0, k]
+    bx.fill_between(xr, rand_lo, rand_hi, color=FAINT, lw=0, zorder=0)
+    bx.text(21, 103, "random head sets", fontsize=5.6, color=INK2, va="bottom")
     styles = {"suicide": (RED, "o", True), "sentiment (SST-2)": (INK, "o", False), "sports (AG News)": (INK, "^", True)}
-    for name, (xs, ys) in auc.items():
+    for name, (xs, ys) in left.items():
         c, m, filled = styles[name]
         bx.plot(xs, ys, "-", color=c, lw=0.9)
         bx.plot(xs, ys, m, ms=3.2, color=c, mfc=c if filled else "white", mec=c, mew=0.7, zorder=4)
-    bx.text(41.2, auc["suicide"][1][-1], "suicide", fontsize=5.8, color=RED, va="center", ha="left")
-    bx.text(41.2, auc["sentiment (SST-2)"][1][-1], "sentiment", fontsize=5.8, color=INK, va="center", ha="left")
-    bx.text(41.2, auc["sports (AG News)"][1][-1], "sports", fontsize=5.8, color=INK, va="center", ha="left")
-    bx.set_xticks([0, 5, 10, 20, 40]); bx.set_xlim(-1.5, 47)
+    for i, name in enumerate(styles):                      # key in the empty middle of the panel
+        c, m, filled = styles[name]
+        yk = 62 - 8 * i
+        bx.plot([22.5, 25.5], [yk, yk], "-", color=c, lw=0.9)
+        bx.plot(24, yk, m, ms=3.0, color=c, mfc=c if filled else "white", mec=c, mew=0.7)
+        bx.text(26.5, yk, name, fontsize=5.8, color=c, va="center", ha="left")
+    bx.set_xticks([0, 5, 10, 20, 40]); bx.set_xlim(-1.5, 43)
     bx.spines["bottom"].set_bounds(0, 40)
-    bx.set_ylim(0.42, 1.02); bx.set_yticks([0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+    bx.set_ylim(-3, 112); bx.set_yticks([0, 25, 50, 75, 100])
+    bx.spines["left"].set_bounds(0, 100)
     bx.set_xlabel("top-$k$ heads mean-ablated")
-    bx.set_ylabel("ROC-AUC, same yes/no format")
+    bx.set_ylabel("% of logit gap left, same yes/no format")
 
     panel(fig, ax, "A", "Llama-3.1-8B, heads ranked by patching")
     panel(fig, bx, "B")

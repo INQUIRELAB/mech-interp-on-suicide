@@ -88,25 +88,23 @@ for k, ln in enumerate([7.5, 6.0, 7.5, 4.5]):
     hline(PX + 1.8, PX + 1.8 + ln, py0 + PH - 3.0 - 2.6 * k, color=INK2, lw=0.9, zorder=4)
 node_label(PX + PW / 2, YL, "Post")
 
-# -- 2 model: 32 layers, 13-16 highlighted ----------------------------------------------------
+# -- 2 model: 32 layers, 13-19 highlighted ----------------------------------------------------
 flow(21.5, 44.5, YC, ["Does this text show signs", "of suicidal ideation? Yes/No"],
      ["score = logit(Yes) − logit(No)", "at the final token"])
 X0, PITCH, SW, SH = 47.5, 0.86, 0.56, 16.0
 xl = [X0 + i * PITCH for i in range(32)]
 for i, x in enumerate(xl):
-    if i == 16:
-        fc, ec = RED, RED
-    elif 13 <= i <= 15:
+    if 13 <= i <= 19:           # the late step in which the answer reaches the final token (Llama)
         fc, ec = REDF, RED
     else:
         fc, ec = PALE, LINE
     ax.add_patch(Rectangle((x, YC - SH / 2), SW, SH, fc=fc, ec=ec, lw=0.3, zorder=3))
-t(xl[16] + SW / 2, YC + SH / 2 + 1.0, "16", S_SMALL, RED, weight="bold", ha="center")
+t((xl[13] + xl[19] + SW) / 2, YC + SH / 2 + 1.0, "13–19", S_SMALL, RED, weight="bold", ha="center")
 MXC = (xl[0] + xl[31] + SW) / 2
 node_label(MXC, YL, "Llama-3.1-8B, 32 layers")
 
 # -- 3 final-token state h with direction r ---------------------------------------------------
-flow(77.5, 100.5, YC, ["layer 16, final token"], ["the answer forms", "between layers 13 and 16"])
+flow(77.5, 100.5, YC, ["final token"], ["the answer forms", "in one late step"])
 NC, CW, CH = 9, 3.0, 1.7
 HX = 103.0
 hy0 = YC - NC * CH / 2
@@ -117,8 +115,8 @@ for k in range(NC):
 t(HX + CW + 1.2, hy0 + 5 * CH, "$\mathbf{r}$", S_BODY, RED, va="center")
 node_label(HX + CW / 2 + 1, YL, "$\mathbf{h}$, 4096 numbers")
 
-# -- 4 edits at layer 16 ----------------------------------------------------------------------
-flow(111.5, 134.5, YC, ["swap · ablate · steer r", "at layer 16"],
+# -- 4 edits to r (layers differ by analysis; Multimedia Appendix 1) ------------------------------
+flow(111.5, 134.5, YC, ["swap · ablate · steer r", "inside the model"],
      ["r = mean(suicidal) −", "mean(non-suicidal)"], color=RED)
 # icon: Yes/No logit bars, before (outline) and after (filled)
 BX = 138.0
@@ -131,13 +129,13 @@ node_label(BX + 7.0, YL, "Change in answer")
 
 # -- controls, test sets and other models -------------------------------------------------------
 t(134.0, 84.0, "each edit vs a control:", S_SMALL, INK2)
-t(134.0, 81.0, "random directions, equal-KL", S_SMALL, INK2)
-t(134.0, 78.0, "nulls, always-No questions", S_SMALL, INK2)
+t(134.0, 81.0, "equal-KL null directions, other", S_SMALL, INK2)
+t(134.0, 78.0, "tasks' directions, always-No questions", S_SMALL, INK2)
 t(0, 78.0, "Test sets", S_SMALL, weight="bold")
 t(0, 75.0, "Suicide-Watch-232K (benchmark) · SWMH, r/SuicideWatch vs r/depression ·", S_SMALL, INK2)
-t(0, 72.0, "UMD, 245 users, clinician-rated risk · 64 minimal pairs (same words, other meaning)", S_SMALL, INK2)
-t(0, 67.6, "Also Qwen2.5-7B, Mistral-7B, Gemma-2-9B (16-bit, one forward pass) · keyword baselines: "
-           "TF-IDF + logistic regression, explicit-term lexicon", S_SMALL, INK2)
+t(0, 72.0, "UMD, 245 users, expert-rated risk · 64 minimal pairs (same words, other meaning)", S_SMALL, INK2)
+t(0, 67.6, "Also Qwen2.5-7B, Mistral-7B, Gemma-2-9B (16-bit, one forward pass) · text baselines: "
+           "TF-IDF classifier, explicit-term lexicon", S_SMALL, INK2)
 
 OUT.mkdir(exist_ok=True)
 fig.savefig(OUT / "fig1_overview.pdf")

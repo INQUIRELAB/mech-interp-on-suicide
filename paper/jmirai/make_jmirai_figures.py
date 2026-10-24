@@ -157,18 +157,13 @@ def fig_benchmark_vs_matched():
     # b: register-matched SWMH, AUC per prompt, 3 models
     variants = ["base", "neg_flip", "clinical", "contrast", "escalate", "fewshot", "rating"]
     labels = ["base", "negated", "clinical definition", "contrast", "triage", "few-shot", "1-5 rating"]
-    files = sorted((D / "paper2/prompt_invariance").glob("*.json"))
-    first = load(files[0].relative_to(D)); tfa_full = first["tfidf_auc"]
-    # TF-IDF on the same truncated text as the models (one fit per tokenizer; the four agree to 0.003):
-    # band spans the four CIs, line at their mean. Full-post TF-IDF (the original analysis) is dashed.
-    trn = load("tfidf_truncation/tfidf_truncation.json")["models"]
-    t_auc = np.mean([r["tfidf_trunc"]["auc"] for r in trn.values()])
-    t_lo = min(r["tfidf_trunc"]["ci95"][0] for r in trn.values()); t_hi = max(r["tfidf_trunc"]["ci95"][1] for r in trn.values())
+    files = sorted((D / "paper2/prompt_invariance_full").glob("suicide_depression__*.json"))
+    # Full posts for both systems (4096-token budget; one evaluation post cut). TF-IDF is fit and scored on
+    # full posts in every run, so it is drawn once: band = 95% CI, line = AUC.
+    first = load(files[0].relative_to(D)); tfa_full = first["tfidf_auc"]; t_lo, t_hi = first["tfidf_ci95"]
     axb.axvspan(t_lo, t_hi, color=FAINT, lw=0, zorder=0)
-    axb.axvline(t_auc, color=CTRL, lw=0.8, zorder=1)
-    axb.axvline(tfa_full, color=CTRL, lw=0.6, ls=(0, (3, 2)), zorder=1)
-    axb.text(t_auc - 0.002, -0.75, f"TF-IDF, same text {t_auc:.2f}", ha="right", va="bottom", fontsize=5.8, color=INK2)
-    axb.text(tfa_full + 0.002, -0.75, f"full post {tfa_full:.3f}", ha="left", va="bottom", fontsize=5.8, color=INK2)
+    axb.axvline(tfa_full, color=CTRL, lw=0.8, zorder=1)
+    axb.text(tfa_full - 0.002, -0.75, f"TF-IDF {tfa_full:.3f}", ha="right", va="bottom", fontsize=5.8, color=INK2)
     keys = []
     for j, f in enumerate(files):
         a = load(f.relative_to(D)); k = model_key(a["model"]); keys.append(k)
@@ -183,24 +178,18 @@ def fig_benchmark_vs_matched():
     axb.set_xlabel("ROC-AUC, suicide vs depression (SWMH)")
 
     # c: sensitivity at 90% specificity (models with per-post scores)
-    npzs = sorted((D / "paper2/prompt_invariance").glob("*.npz"))
+    npzs = sorted((D / "paper2/prompt_invariance_full").glob("*.npz"))
     cats = ["base", "clinical", "contrast", "TF-IDF +\ncontrast (stacked)"]
-    # TF-IDF drawn once, as in B: band and line for the same text as the models, dashed line for full posts
+    # TF-IDF drawn once, as in B (the same full-post fit in every run)
     z0 = np.load(npzs[0]); y0 = z0["y"].astype(int)
-    zt = np.load(D / "tfidf_truncation/tfidf_truncation.npz")
-    assert (zt["y"].astype(int) == y0).all()
-    tags = [f.name.split("__")[1] for f in npzs]
-    tv = np.mean([sens_at_spec(y0, zt[f"tfidf_trunc__{t}"]) for t in tags])
-    cis = [boot_ci(y0, lambda i, s=zt[f"tfidf_trunc__{t}"]: sens_at_spec(y0[i], s[i])) for t in tags]
-    tv_full = sens_at_spec(y0, z0["tfidf"])
-    axc.axvspan(min(c[0] for c in cis), max(c[1] for c in cis), color=FAINT, lw=0, zorder=0)
+    tv = sens_at_spec(y0, z0["tfidf"]); ci = boot_ci(y0, lambda i: sens_at_spec(y0[i], z0["tfidf"][i]))
+    axc.axvspan(ci[0], ci[1], color=FAINT, lw=0, zorder=0)
     axc.axvline(tv, color=CTRL, lw=0.8, zorder=1)
-    axc.axvline(tv_full, color=CTRL, lw=0.6, ls=(0, (3, 2)), zorder=1)
-    axc.text(tv - 0.004, -0.7, f"TF-IDF, same text {tv:.0%}", ha="right", va="bottom", fontsize=5.8, color=INK2)
-    axc.text(tv_full + 0.004, -0.7, f"full post {tv_full:.0%}", ha="left", va="bottom", fontsize=5.8, color=INK2)
+    axc.text(tv - 0.004, -0.7, f"TF-IDF {tv:.0%}", ha="right", va="bottom", fontsize=5.8, color=INK2)
     for j, f in enumerate(npzs):
         z = np.load(f); y = z["y"].astype(int); k = model_key(f.name)
-        st = stack_cv(y, zt[f"tfidf_trunc__{f.name.split('__')[1]}"], z["contrast"])
+        assert (y == y0).all()
+        st = stack_cv(y, z["tfidf"], z["contrast"])
         scores = [z["base"], z["clinical"], z["contrast"], st]
         yy = np.arange(len(cats)) + (j - (len(npzs) - 1) / 2) * 0.72 / len(npzs)
         for yi, s in zip(yy, scores):
@@ -235,7 +224,7 @@ def fig_umd():
     order = ["llama", "qwen", "mistral", "gemma"]
     files = {model_key(f.name): f for f in (D / "umd_v2").glob("*.json")}
     ax.axhline(2.5, color=CTRL_LT, lw=0.5, zorder=0)
-    ax.text(0.51, 2.62, "keyword baselines (same truncated text)", ha="left", va="top", fontsize=5.2,
+    ax.text(0.51, 2.62, "text baselines (same truncated text)", ha="left", va="top", fontsize=5.2,
             color=INK2, style="italic")
     ax.axvline(0.5, color=INK2, lw=0.5, ls=(0, (3, 2)), zorder=1)
     ax.text(0.505, -0.5, "chance", fontsize=5.6, color=INK2, va="top")
@@ -251,13 +240,13 @@ def fig_umd():
     ax.get_yticklabels()[0].set_color(RED)
     ax.set_ylim(len(readouts) - 0.45, -0.55)
     ax.set_xlim(0.4, 0.95); ax.set_xticks([0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
-    ax.set_xlabel("ROC-AUC, clinician high risk (c, d) vs low risk (a, b), UMD")
+    ax.set_xlabel("ROC-AUC, expert-rated high risk (c, d) vs low risk (a, b), UMD")
     # stacked key in the empty lower-right corner
     for i, k in enumerate(order):
         m, filled = MARK[k]
         ax.plot(0.79, 4.25 + i * 0.3, m, ms=2.8, color=INK, mfc=INK if filled else "white", mec=INK, mew=0.6)
         ax.text(0.805, 4.25 + i * 0.3, MODELS[k], va="center", fontsize=5.6)
-    save(fig, "fig3_umd_clinician_risk")
+    save(fig, "fig3_umd_expert_risk")
 
 
 # ---------------------------------------------------------------- Figure 3
@@ -302,9 +291,10 @@ def fig_minpairs():
 
 # ---------------------------------------------------------------- Figure 4
 def fig_mechanism():
-    fig = plt.figure(figsize=(FULL, 2.45))
-    gs = fig.add_gridspec(1, 2, width_ratios=[1.45, 1], wspace=0.32)
-    ax = fig.add_subplot(gs[0]); bx = fig.add_subplot(gs[1])
+    fig = plt.figure(figsize=(FULL, 4.55))
+    gs = fig.add_gridspec(2, 2, width_ratios=[1.45, 1], height_ratios=[1, 0.82], wspace=0.32, hspace=0.78)
+    ax = fig.add_subplot(gs[0, 0]); bx = fig.add_subplot(gs[0, 1]); cx = fig.add_subplot(gs[1, :])
+    fig_offtarget(cx)
 
     fams = [("isotropic", "isotropic"), ("pca", "top-PC"), ("sign_random", "sign-random"),
             ("shuffled_label", "shuffled-label")]
@@ -370,7 +360,48 @@ def fig_mechanism():
 
     panel(fig, ax, "A")
     panel(fig, bx, "B", "steering, equal KL (0.1)")
+    panel(fig, cx, "C", "off-target necessity")
     save(fig, "fig5_mechanism")
+
+
+def fig_offtarget(cx):
+    """AUC of the suicide task (red) and mean AUC of four unrelated yes/no tasks (grey) after a direction is projected
+    out (data/offtarget_necessity), every layer or the upper half; for the unrelated tasks' own directions, the lowest
+    suicide AUC of the four."""
+    other = ["sentiment", "toxicity", "sports", "truth"]
+    rows = [("none", None, "no ablation"), ("suicide", "all", "suicide direction, every layer"),
+            ("suicide", "upper", "suicide direction, upper half"),
+            ("others", "upper", "unrelated tasks' directions (lowest)"),
+            ("answer_polarity", "upper", "answer polarity, upper half")]
+    files = {model_key(f.name): f for f in (D / "offtarget_necessity").glob("*.json")}
+    order = [k for k in ["llama", "qwen", "mistral", "gemma"] if k in files]
+    for j, k in enumerate(order):
+        a = load(files[k].relative_to(D))
+        for i, (d, scope, _) in enumerate(rows):
+            yi = i + (j - (len(order) - 1) / 2) * 0.16
+            if d == "none":
+                s, o = a["baseline"]["suicide"]["auc"], np.mean([a["baseline"][t]["auc"] for t in other])
+            elif d == "others":
+                s = min(a["ablations"][f"{x}|{scope}"]["tasks"]["suicide"]["auc"] for x in other); o = None
+            else:
+                r = a["ablations"][f"{d}|{scope}"]["tasks"]
+                s, o = r["suicide"]["auc"], np.mean([r[t]["auc"] for t in other])
+            dot(cx, s, yi, k, color=RED, ms=3.0)
+            if o is not None:
+                m, _ = MARK[k]
+                cx.plot(o, yi, m, ms=3.0, color=CTRL, mfc="white", mec=CTRL, mew=0.7, zorder=4)
+    hrows(cx, [r[2] for r in rows])
+    cx.set_ylim(len(rows) - 0.45, -0.55)
+    cx.axvline(0.5, color=INK2, lw=0.5, ls=(0, (3, 2)), zorder=1)
+    cx.set_xlim(0.3, 1.02); cx.set_xticks([0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+    cx.set_xlabel("ROC-AUC after the direction is projected out")
+    for i, k in enumerate(order):                       # key in the empty lower-left part of the panel
+        m, filled = MARK[k]
+        cx.plot(0.315, 2.62 + 0.42 * i, m, ms=2.8, color=INK, mfc=INK if filled else "white", mec=INK, mew=0.6)
+        cx.text(0.33, 2.62 + 0.42 * i, MODELS[k], va="center", fontsize=5.6)
+    cx.text(0.52, 2.62, "red: suicide task", va="center", fontsize=5.6, color=RED)
+    cx.text(0.52, 3.04, "grey: mean of sentiment, toxicity,", va="center", fontsize=5.6, color=CTRL)
+    cx.text(0.52, 3.46, "sports and truth tasks", va="center", fontsize=5.6, color=CTRL)
 
 
 if __name__ == "__main__":

@@ -71,6 +71,9 @@ def parse_args():
     p.add_argument("--batch", type=int, default=16)
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--force-ladder", action="store_true", help="run causal rungs even on NO-GO")
+    p.add_argument("--skip-unmatched-nulls", action="store_true",
+                   help="necessity: evaluate the null draws only in the KL-matched test (zero mode)")
+    p.add_argument("--skip-sufficient", action="store_true", help="stop after the necessity rung")
     p.add_argument("--out-dir", default=str(PROJECT_ROOT / "results" / "audit"))
     p.add_argument("--smoke", action="store_true", help="tiny sizes for a pipeline check")
     a = p.parse_args()
@@ -210,7 +213,7 @@ def main():
         tgt_auc, tgt_gap = nec_stats(tgt_hooks)
         tgt_kl = mean_kl(be, ref_prompts, tgt_hooks, base_lp, a.batch)
         tests, null_summary = {}, {}
-        for f in families:
+        for f in ([] if a.skip_unmatched_nulls else families):
             vals, kls = [], []
             for d in null_draws[f]:
                 hk = ablation_hooks(be, d, mode, mu_j)
@@ -280,6 +283,10 @@ def main():
             f"{[round(base_gap - v['ld_gap_mean'], 2) for v in km_summary.values()]} "
             f"(beta {[round(v['beta_mean'], 2) for v in km_summary.values()]}) -> "
             f"{'PASS' if km_verdict['pass'] else 'fail'}")
+
+    if a.skip_sufficient:
+        report["note"] = "sufficiency rung skipped (--skip-sufficient)"
+        return _save(report, a, tag, t0)
 
     # ------------------------------------------------------------ SUFFICIENT
     items = ev_n[: a.n_steer]

@@ -80,6 +80,9 @@ def parse_args():
     p.add_argument("--followup", action="store_true", help="topic-presence test (see docstring)")
     p.add_argument("--n-topic", type=int, default=100, help="positive texts per concept for topic_dir")
     p.add_argument("--only-variants", default="", help="comma-separated subset of variants to run")
+    p.add_argument("--fit-prompt", default="question", choices=["question", "post"],
+                   help="question: fit at the answer position of the concept's yes/no prompt; "
+                        "post: fit on the text alone, with no question")
     p.add_argument("--smoke", action="store_true")
     a = p.parse_args()
     if a.smoke:
@@ -116,8 +119,12 @@ def main():
         n = min(len(pos), len(neg))
         nf = min(a.n_fit, n - a.n_steer)
         P = lambda ts, q=c.question, pre=c.prefix: [be.polar_prompt(t, pre, q) for t in ts]
-        _, Hp = be.collect(P(pos[:nf]), yes, no, a.batch, verbose=False)
-        _, Hn = be.collect(P(neg[:nf]), yes, no, a.batch, verbose=False)
+        if a.fit_prompt == "post":
+            F = lambda ts: [be._wrap_chat(f"Read the following text.\n\nText: {be._truncate(t)}") for t in ts]
+        else:
+            F = P
+        _, Hp = be.collect(F(pos[:nf]), yes, no, a.batch, verbose=False)
+        _, Hn = be.collect(F(neg[:nf]), yes, no, a.batch, verbose=False)
         raw = {j: Hp[:, j].astype(np.float64).mean(0) - Hn[:, j].astype(np.float64).mean(0) for j in window}
         C[name] = {"cfg": c, "items": neg[nf:nf + a.n_steer],
                    "dir": {j: unit(raw[j]).astype(np.float32) for j in window},
@@ -125,7 +132,7 @@ def main():
                    "pos_proj": {j: float(Hp[:, j].astype(np.float32).mean(0) @ unit(raw[j])) for j in window}}
         if a.followup:  # own question (Yes) minus off-target topic questions (No), same texts
             tp = pos[:min(a.n_topic, nf)]
-            Hown = Hp[:len(tp)]
+            Hown = Hp[:len(tp)] if a.fit_prompt == "question" else be.collect(P(tp), yes, no, a.batch, verbose=False)[1]
             Hoff = [be.collect(P(tp, q, pr), yes, no, a.batch, verbose=False)[1]
                     for nm, pr, q in OFFTARGET_QUESTIONS if nm not in name]
             C[name]["topic_raw"] = {j: Hown[:, j].astype(np.float64).mean(0)
