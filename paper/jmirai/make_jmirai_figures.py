@@ -16,6 +16,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.patches import Patch
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
@@ -133,235 +134,263 @@ def save(fig, name):
     plt.close(fig)
 
 
-# ---------------------------------------------------------------- Figure 1
+# ---------------------------------------------------------------- Figures 2, 3 and 5 (plain style)
+# Arial at the manuscript's 11 pt, matplotlib's default colours (one per model), drawn at the printed
+# text width (6.5 in) and saved without cropping, so the text prints at its true size.
+PLAIN = {
+    "font.size": 11, "axes.labelsize": 11, "axes.titlesize": 11, "xtick.labelsize": 10,
+    "ytick.labelsize": 10, "legend.fontsize": 10,
+    "axes.linewidth": 0.8, "xtick.major.width": 0.8, "ytick.major.width": 0.8,
+    "xtick.major.size": 3.5, "ytick.major.size": 3.5, "xtick.major.pad": 3, "ytick.major.pad": 3,
+    "axes.labelpad": 4, "axes.edgecolor": "black", "xtick.color": "black", "ytick.color": "black",
+    "text.color": "black", "axes.labelcolor": "black", "lines.linewidth": 1.0,
+}
+COLOR = {"llama": "#1f77b4", "qwen": "#ff7f0e", "mistral": "#2ca02c", "gemma": "#d62728"}
+ORDER = ["llama", "qwen", "mistral", "gemma"]
+OFFSET = dict(zip(ORDER, [-0.27, -0.09, 0.09, 0.27]))
+TEXT_W = 6.5
+
+
+def ci_dot(ax, x, v, lo, hi, color, label=None):
+    ax.errorbar(x, v, yerr=[[v - lo], [hi - v]], fmt="o", ms=5, color=color, elinewidth=1.0,
+                capsize=2.5, capthick=1.0, label=label, zorder=3)
+
+
+def tfidf_ref(ax, v, lo, hi):
+    ax.axhspan(lo, hi, color="0.88", lw=0, zorder=0)
+    ax.axhline(v, color="black", lw=1.0, ls="--", zorder=1)
+
+
+def title(ax, letter, text):
+    ax.set_title(rf"$\mathbf{{{letter}}}$   {text}", loc="left", pad=6)
+
+
+def save_plain(fig, name):
+    OUT.mkdir(exist_ok=True)
+    for ext in ("png", "pdf"):
+        fig.savefig(OUT / f"{name}.{ext}", dpi=600)
+    plt.close(fig)
+
+
 def fig_benchmark_vs_matched():
-    fig = plt.figure(figsize=(FULL, 2.35))
-    gs = fig.add_gridspec(1, 3, width_ratios=[0.62, 1.25, 1.0], wspace=0.62)
-    axa, axb, axc = (fig.add_subplot(gs[i]) for i in range(3))
+    with plt.rc_context(PLAIN):
+        fig = plt.figure(figsize=(TEXT_W, 6.2), layout="constrained")
+        rows = fig.add_gridspec(2, 1)
+        t = rows[0].subgridspec(1, 2, width_ratios=[1.1, 3])
+        b = rows[1].subgridspec(1, 2, width_ratios=[2.3, 1])
+        axa, axb = fig.add_subplot(t[0]), fig.add_subplot(t[1])
+        axc, axl = fig.add_subplot(b[0]), fig.add_subplot(b[1])
 
-    # a: the standard benchmark (232K), Llama, n=1000/class
-    g = load("audit/suicide/llama_3_1_8b_instruct__seed0.json")["gate"]
-    rows = [("model\nanswer", g["behavioral_auc"], g["behavioral_ci95"], INK),
-            ("TF-IDF", g["tfidf_auc"], g["tfidf_ci95"], CTRL)]
-    for i, (_, v, ci, c) in enumerate(rows):
-        axa.hlines(i, ci[0], ci[1], color=c, lw=0.9)
-        axa.plot(v, i, "o", color=c, ms=3.4, mec="white", mew=0.5, zorder=4)
-        axa.text(v, i - 0.13, f"{v:.3f}", ha="center", va="bottom", fontsize=5.8, color=c)
-    hrows(axa, [r[0] for r in rows])
-    axa.set_ylim(1.45, -0.75)
-    axa.set_xlim(0.93, 0.97); axa.set_xticks([0.93, 0.95, 0.97])
-    axa.set_xlabel("ROC-AUC")
-    axa.text(0.5, -0.17, "Llama-3.1-8B", transform=axa.transAxes, ha="center", va="top",
-             fontsize=5.6, color=INK2)
+        # A: the standard benchmark (Suicide-Watch-232K), Llama only, 1000 posts per class
+        g = load("audit/suicide/llama_3_1_8b_instruct__seed0.json")["gate"]
+        for x, v, ci, c in [(0, g["behavioral_auc"], g["behavioral_ci95"], COLOR["llama"]),
+                            (1, g["tfidf_auc"], g["tfidf_ci95"], "black")]:
+            ci_dot(ax=axa, x=x, v=v, lo=ci[0], hi=ci[1], color=c)
+        axa.set_xticks([0, 1], ["Llama-3.1-8B", "TF-IDF"], rotation=30, ha="right", rotation_mode="anchor")
+        axa.set_xlim(-0.6, 1.6)
+        axa.set_ylim(0.93, 0.97); axa.set_yticks([0.93, 0.94, 0.95, 0.96, 0.97])
+        axa.set_ylabel("AUC")
+        title(axa, "A", "Suicide-Watch-232K")
 
-    # b: register-matched SWMH, AUC per prompt, 3 models
-    variants = ["base", "neg_flip", "clinical", "contrast", "escalate", "fewshot", "rating"]
-    labels = ["base", "negated", "clinical definition", "contrast", "triage", "few-shot", "1-5 rating"]
-    files = sorted((D / "paper2/prompt_invariance_full").glob("suicide_depression__*.json"))
-    # Full posts for both systems (4096-token budget; one evaluation post cut). TF-IDF is fit and scored on
-    # full posts in every run, so it is drawn once: band = 95% CI, line = AUC.
-    first = load(files[0].relative_to(D)); tfa_full = first["tfidf_auc"]; t_lo, t_hi = first["tfidf_ci95"]
-    axb.axvspan(t_lo, t_hi, color=FAINT, lw=0, zorder=0)
-    axb.axvline(tfa_full, color=CTRL, lw=0.8, zorder=1)
-    axb.text(tfa_full - 0.002, -0.75, f"TF-IDF {tfa_full:.3f}", ha="right", va="bottom", fontsize=5.8, color=INK2)
-    keys = []
-    for j, f in enumerate(files):
-        a = load(f.relative_to(D)); k = model_key(a["model"]); keys.append(k)
-        y = np.arange(len(variants)) + (j - (len(files) - 1) / 2) * 0.72 / len(files)
-        for yi, t in zip(y, variants):
-            v = a["variants"][t]["auc"]; lo, hi = a["variants"][t]["ci95"]
-            axb.hlines(yi, lo, hi, color=INK, lw=0.5, zorder=3)
-            dot(axb, v, yi, k)
-    hrows(axb, labels)
-    axb.set_ylim(len(variants) - 0.5, -0.85)
-    axb.set_xlim(0.68, 0.88); axb.set_xticks([0.70, 0.75, 0.80, 0.85])
-    axb.set_xlabel("ROC-AUC, suicide vs depression (SWMH)")
+        # B: SWMH (register-matched), AUC per prompt, full posts for both systems
+        variants = ["base", "neg_flip", "clinical", "contrast", "escalate", "fewshot", "rating"]
+        labels = ["Base", "Negated", "Clinical definition", "Contrast", "Triage", "Few-shot", "1-5 rating"]
+        files = {model_key(f.name): f for f in (D / "paper2/prompt_invariance_full").glob("suicide_depression__*.json")}
+        first = load(files["llama"].relative_to(D))
+        tfidf_ref(axb, first["tfidf_auc"], *first["tfidf_ci95"])
+        for k in ORDER:
+            a = load(files[k].relative_to(D))
+            for i, t_ in enumerate(variants):
+                lo, hi = a["variants"][t_]["ci95"]
+                ci_dot(axb, i + OFFSET[k], a["variants"][t_]["auc"], lo, hi, COLOR[k])
+        axb.set_xticks(range(len(variants)), labels, rotation=30, ha="right", rotation_mode="anchor")
+        axb.set_xlim(-0.6, len(variants) - 0.4)
+        axb.set_ylim(0.70, 0.90); axb.set_yticks([0.70, 0.75, 0.80, 0.85, 0.90])
+        axb.set_ylabel("AUC")
+        title(axb, "B", "SWMH (r/SuicideWatch vs r/depression)")
 
-    # c: sensitivity at 90% specificity (models with per-post scores)
-    npzs = sorted((D / "paper2/prompt_invariance_full").glob("*.npz"))
-    cats = ["base", "clinical", "contrast", "TF-IDF +\ncontrast (stacked)"]
-    # TF-IDF drawn once, as in B (the same full-post fit in every run)
-    z0 = np.load(npzs[0]); y0 = z0["y"].astype(int)
-    tv = sens_at_spec(y0, z0["tfidf"]); ci = boot_ci(y0, lambda i: sens_at_spec(y0[i], z0["tfidf"][i]))
-    axc.axvspan(ci[0], ci[1], color=FAINT, lw=0, zorder=0)
-    axc.axvline(tv, color=CTRL, lw=0.8, zorder=1)
-    axc.text(tv - 0.004, -0.7, f"TF-IDF {tv:.0%}", ha="right", va="bottom", fontsize=5.8, color=INK2)
-    for j, f in enumerate(npzs):
-        z = np.load(f); y = z["y"].astype(int); k = model_key(f.name)
-        assert (y == y0).all()
-        st = stack_cv(y, z["tfidf"], z["contrast"])
-        scores = [z["base"], z["clinical"], z["contrast"], st]
-        yy = np.arange(len(cats)) + (j - (len(npzs) - 1) / 2) * 0.72 / len(npzs)
-        for yi, s in zip(yy, scores):
-            v = sens_at_spec(y, s); ci = boot_ci(y, lambda i: sens_at_spec(y[i], s[i]))
-            axc.hlines(yi, ci[0], ci[1], color=INK, lw=0.5, zorder=3)
-            dot(axc, v, yi, k)
-    hrows(axc, cats)
-    axc.set_ylim(len(cats) - 0.5, -0.85)
-    axc.set_xlim(0.3, 0.7); axc.set_xticks([0.3, 0.4, 0.5, 0.6, 0.7])
-    axc.set_xticklabels(["30%", "40", "50", "60", "70%"])
-    axc.set_xlabel("sensitivity at 90% specificity")
+        # C: SWMH, sensitivity at 90% specificity
+        cats = ["Base", "Clinical\ndefinition", "Contrast", "TF-IDF +\ncontrast"]
+        npzs = {model_key(f.name): f for f in (D / "paper2/prompt_invariance_full").glob("*.npz")}
+        z0 = np.load(npzs["llama"]); y0 = z0["y"].astype(int)
+        tv = sens_at_spec(y0, z0["tfidf"]); tci = boot_ci(y0, lambda i: sens_at_spec(y0[i], z0["tfidf"][i]))
+        tfidf_ref(axc, 100 * tv, 100 * tci[0], 100 * tci[1])
+        for k in ORDER:
+            z = np.load(npzs[k]); y = z["y"].astype(int)
+            assert (y == y0).all()
+            st = stack_cv(y, z["tfidf"], z["contrast"])
+            for i, s in enumerate([z["base"], z["clinical"], z["contrast"], st]):
+                v = sens_at_spec(y, s); ci = boot_ci(y, lambda j: sens_at_spec(y[j], s[j]))
+                ci_dot(axc, i + OFFSET[k], 100 * v, 100 * ci[0], 100 * ci[1], COLOR[k])
+        axc.set_xticks(range(len(cats)), cats)
+        axc.set_xlim(-0.6, len(cats) - 0.4)
+        axc.set_ylim(30, 70); axc.set_yticks([30, 40, 50, 60, 70])
+        axc.set_ylabel("Sensitivity at 90%\nspecificity (%)")
+        title(axc, "C", "SWMH (r/SuicideWatch vs r/depression)")
 
-    panel(fig, axa, "A", "Suicide-Watch-232K")
-    panel(fig, axb, "B", "SWMH, by prompt")
-    panel(fig, axc, "C")
-    kx = 0.30
-    for k in ["llama", "qwen", "mistral", "gemma"]:
-        m, filled = MARK[k]
-        fig.add_artist(plt.Line2D([kx], [-0.075], marker=m, ms=3.0, color=INK, mfc=INK if filled else "white",
-                                  mec=INK, mew=0.7, transform=fig.transFigure, ls=""))
-        fig.text(kx + 0.012, -0.075, MODELS[k], va="center", fontsize=5.8)
-        kx += 0.12
-    save(fig, "fig2_benchmark_vs_matched")
+        # Shared key
+        axl.axis("off")
+        h = [plt.Line2D([], [], marker="o", ms=5, ls="", color=COLOR[k]) for k in ORDER]
+        h += [plt.Line2D([], [], color="black", ls="--", lw=1.0),
+              Patch(color="0.88", lw=0)]
+        axl.legend(h, [MODELS[k] for k in ORDER] + ["TF-IDF", "TF-IDF 95% CI"], loc="center left",
+                   frameon=False, handlelength=1.8)
+        save_plain(fig, "fig2_benchmark_vs_matched")
 
 
-# ---------------------------------------------------------------- Figure 2
 def fig_umd():
-    fig, ax = plt.subplots(figsize=(FULL * 0.66, 2.55))
-    readouts = [("proj_site", "direction projection"), ("behav", "model answer"),
-                ("probe_cv", "linear probe (in-domain CV)"), ("tfidf_cv_seen", "TF-IDF (in-domain CV)"),
-                ("tfidf232_seen", "TF-IDF (trained on 232K)"), ("lexicon_seen", "explicit-term lexicon")]
-    order = ["llama", "qwen", "mistral", "gemma"]
-    files = {model_key(f.name): f for f in (D / "umd_v2").glob("*.json")}
-    ax.axhline(2.5, color=CTRL_LT, lw=0.5, zorder=0)
-    ax.text(0.51, 2.62, "text baselines (same truncated text)", ha="left", va="top", fontsize=5.2,
-            color=INK2, style="italic")
-    ax.axvline(0.5, color=INK2, lw=0.5, ls=(0, (3, 2)), zorder=1)
-    ax.text(0.505, -0.5, "chance", fontsize=5.6, color=INK2, va="top")
-    for j, k in enumerate(order):
-        a = load(files[k].relative_to(D))["scores"]
-        y = np.arange(len(readouts)) + (j - 1.5) * 0.17
-        for yi, (key, _) in zip(y, readouts):
-            v = a[key]["auc_hi_lo"]; lo, hi = a[key]["auc_hi_lo_ci95"]
-            c = RED if key == "proj_site" else (CTRL if key in ("tfidf_cv_seen", "tfidf232_seen", "lexicon_seen") else INK)
-            ax.hlines(yi, lo, hi, color=c, lw=0.5, zorder=3)
-            dot(ax, v, yi, k, color=c, ms=3.0)
-    hrows(ax, [r[1] for r in readouts])
-    ax.get_yticklabels()[0].set_color(RED)
-    ax.set_ylim(len(readouts) - 0.45, -0.55)
-    ax.set_xlim(0.4, 0.95); ax.set_xticks([0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
-    ax.set_xlabel("ROC-AUC, expert-rated high risk (c, d) vs low risk (a, b), UMD")
-    # stacked key in the empty lower-right corner
-    for i, k in enumerate(order):
-        m, filled = MARK[k]
-        ax.plot(0.79, 4.25 + i * 0.3, m, ms=2.8, color=INK, mfc=INK if filled else "white", mec=INK, mew=0.6)
-        ax.text(0.805, 4.25 + i * 0.3, MODELS[k], va="center", fontsize=5.6)
-    save(fig, "fig3_umd_expert_risk")
+    with plt.rc_context(PLAIN):
+        fig, ax = plt.subplots(figsize=(TEXT_W, 3.7), layout="constrained")
+        readouts = [("proj_site", "Direction\nprojection"), ("behav", "Model\nanswer"),
+                    ("probe_cv", "Linear\nprobe"), ("tfidf_cv_seen", "TF-IDF"),
+                    ("tfidf232_seen", "TF-IDF,\n232K-trained"), ("lexicon_seen", "Explicit-term\nlexicon")]
+        files = {model_key(f.name): f for f in (D / "umd_v2").glob("*.json")}
+        ax.axhline(0.5, color="0.5", lw=1.0, ls=":", zorder=1)
+        ax.axvline(2.5, color="0.6", lw=0.8, zorder=1)
+        for k in ORDER:
+            a = load(files[k].relative_to(D))["scores"]
+            for i, (key, _) in enumerate(readouts):
+                lo, hi = a[key]["auc_hi_lo_ci95"]
+                ci_dot(ax, i + OFFSET[k], a[key]["auc_hi_lo"], lo, hi, COLOR[k])
+        ax.set_xticks(range(len(readouts)), [r[1] for r in readouts])
+        ax.set_xlim(-0.6, len(readouts) - 0.4)
+        ax.set_ylim(0.4, 1.0); ax.set_yticks([0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+        ax.set_ylabel("AUC, high vs low\nexpert-rated risk")
+        ax.text(1.0, 0.97, "From the LLM", ha="center", va="top", fontsize=10)
+        ax.text(4.0, 0.97, "Text baselines", ha="center", va="top", fontsize=10)
+        ax.text(-0.55, 0.505, "Chance", ha="left", va="bottom", fontsize=10, color="0.4")
+        h = [plt.Line2D([], [], marker="o", ms=5, ls="", color=COLOR[k]) for k in ORDER]
+        fig.legend(h, [MODELS[k] for k in ORDER], loc="outside upper center", ncol=4, frameon=False,
+                   handletextpad=0.3, columnspacing=1.5)
+        ax.set_title("UMD Reddit Suicidality Dataset, 245 users", loc="left", pad=6)
+        save_plain(fig, "fig3_umd_expert_risk")
 
 
 # ---------------------------------------------------------------- Figure 3
 def fig_minpairs():
-    order = ["llama", "qwen", "mistral", "gemma"]
-    conds = [("genuine_intent", "genuine intent"), ("counterfactual", "denial (“I would never”)"),
-             ("third_person", "third person"), ("recovery_past", "past / recovered"),
-             ("fiction", "fiction"), ("topical", "topical mention")]
+    conds = [("genuine_intent", "Genuine intent"), ("counterfactual", "Denial (“I would never”)"),
+             ("third_person", "Third person"), ("recovery_past", "Past or recovered"),
+             ("fiction", "Fiction"), ("topical", "Topical mention")]
     files = {model_key(f.name): f for f in (D / "intent_minpairs").glob("*.json")}
-    cmap = LinearSegmentedColormap.from_list("ink", ["#ffffff", "#c4c8cc", "#3a3e44"])
-    fig = plt.figure(figsize=(FULL * 0.82, 2.1))
-    gs = fig.add_gridspec(1, 2, wspace=0.06)
-    axes = [fig.add_subplot(gs[0]), fig.add_subplot(gs[1])]
-    for ax, prompt in zip(axes, ["base", "clinical"]):
-        M = np.array([[load(files[k].relative_to(D))["yes_rate"][c][prompt] for k in order] for c, _ in conds])
-        im = ax.imshow(M, cmap=cmap, vmin=0, vmax=1, aspect="auto")
-        for i in range(M.shape[0]):
-            for j in range(M.shape[1]):
-                ax.text(j, i, f"{M[i, j]:.0%}", ha="center", va="center", fontsize=5.8,
-                        color="white" if M[i, j] > 0.55 else INK)
-        ax.axhline(0.5, color=INK, lw=0.4, xmin=0, xmax=1)
-        ax.set_xticks(range(len(order)))
-        ax.set_xticklabels([MODELS[k] for k in order])
-        ax.xaxis.tick_top()
-        ax.set_yticks(range(len(conds)))
-        ax.set_yticklabels([c[1] for c in conds] if ax is axes[0] else [])
-        for s in ax.spines.values():
-            s.set_visible(False)
-        ax.tick_params(length=0)
-    # values are printed in every cell, so no colour bar
-    fig.canvas.draw()
-    for ax, letter, title in zip(axes, "AB", ["base prompt", "clinical definition"]):
-        bb = ax.get_tightbbox(fig.canvas.get_renderer()).transformed(fig.transFigure.inverted())
-        x0 = bb.x0 if ax is axes[1] else ax.get_position().x0 - 0.0
-        t = fig.text(x0 if ax is axes[1] else bb.x0, bb.y1 + 0.02, letter, fontsize=8,
-                     fontweight="bold", ha="left", va="bottom")
-        fig.canvas.draw()
-        tb = t.get_window_extent().transformed(fig.transFigure.inverted())
-        fig.text(tb.x1 + 0.008, bb.y1 + 0.022, title, fontsize=6.5, ha="left", va="bottom")
-    save(fig, "fig4_minimal_pairs")
+    with plt.rc_context(PLAIN):
+        fig, axes = plt.subplots(2, 1, figsize=(TEXT_W, 5.2), layout="constrained")
+        for ax, prompt, letter, name in zip(axes, ["base", "clinical"], "AB",
+                                            ["Base prompt", "Clinical-definition prompt"]):
+            M = np.array([[load(files[k].relative_to(D))["yes_rate"][c][prompt] for k in ORDER] for c, _ in conds])
+            ax.imshow(M, cmap="Blues", vmin=0, vmax=1, aspect="auto")
+            for i in range(M.shape[0]):
+                for j in range(M.shape[1]):
+                    ax.text(j, i, f"{M[i, j]:.0%}", ha="center", va="center", fontsize=10,
+                            color="white" if M[i, j] > 0.6 else "black")
+            ax.set_xticks(range(len(ORDER)), [MODELS[k] for k in ORDER])
+            ax.set_yticks(range(len(conds)), [c[1] for c in conds])
+            ax.tick_params(length=0)
+            for s in ax.spines.values():
+                s.set_visible(False)
+            title(ax, letter, name)
+        # values are printed in every cell, so no colour bar
+        save_plain(fig, "fig4_minimal_pairs")
 
 
-# ---------------------------------------------------------------- Figure 4
+# ---------------------------------------------------------------- Figure 5 (plain style)
 def fig_mechanism():
-    fig = plt.figure(figsize=(FULL, 4.55))
-    gs = fig.add_gridspec(2, 2, width_ratios=[1.45, 1], height_ratios=[1, 0.82], wspace=0.32, hspace=0.78)
-    ax = fig.add_subplot(gs[0, 0]); bx = fig.add_subplot(gs[0, 1]); cx = fig.add_subplot(gs[1, :])
-    fig_offtarget(cx)
+    with plt.rc_context(PLAIN):
+        fig = plt.figure(figsize=(TEXT_W, 7.4), layout="constrained")
+        rows = fig.add_gridspec(2, 1, height_ratios=[1, 1.05])
+        top = rows[0].subgridspec(1, 2, width_ratios=[1.45, 1])
+        ax, bx = fig.add_subplot(top[0]), fig.add_subplot(top[1])
+        cx = fig.add_subplot(rows[1])
 
-    fams = [("isotropic", "isotropic"), ("pca", "top-PC"), ("sign_random", "sign-random"),
-            ("shuffled_label", "shuffled-label")]
-    order = ["llama", "qwen", "mistral"]
-    files = {model_key(f.name): f for f in (D / "audit_klnec/suicide").glob("*.json")}
-    rng = np.random.default_rng(0)
-    for j, k in enumerate(order):
-        n = load(files[k].relative_to(D))["necessary"]; km = n["kl_matched"]; base = n["baseline_ld_gap"]
-        x0 = j * 6
-        ax.bar(x0, km["target_ld_gap"] / base, color=RED, width=0.72, zorder=3)
-        for i, (fk, _) in enumerate(fams):
-            draws = np.array([dd["ld_gap"] for dd in km["nulls"][fk]["draws"]]) / base
-            ax.bar(x0 + 1 + i, draws.mean(), color=CTRL_LT, width=0.72, lw=0, zorder=2)
-            ax.plot(x0 + 1 + i + rng.uniform(-0.2, 0.2, len(draws)), draws, "o", ms=1.6, color=INK2,
-                    mew=0, zorder=3)
-        ax.text(x0 + 2.0, 1.86, MODELS[k], ha="center", va="bottom", fontsize=6.2)
-        ax.text(x0 + 2.0, 1.80, f"edit KL {km['target_kl']:.2f}", ha="center", va="top", fontsize=5.6,
-                color=INK2)
-    ax.axhline(1, color=INK2, lw=0.5, ls=(0, (3, 2)), zorder=1)
-    ax.text(16.6, 1.015, "no change", ha="right", va="bottom", fontsize=5.6, color=INK2)
-    ticks = [j * 6 + i for j in range(3) for i in range(5)]
-    ax.set_xticks(ticks)
-    ax.set_xticklabels((["suicide direction"] + [f[1] for f in fams]) * 3, rotation=55, ha="right",
-                       rotation_mode="anchor", fontsize=5.6)
-    for t in ax.get_xticklabels()[::5]:
-        t.set_color(RED)
-    ax.tick_params(axis="x", length=0)
-    ax.set_xlim(-0.7, 16.7)
-    ax.set_ylim(0, 2.0); ax.set_yticks([0, 0.5, 1.0, 1.5])
-    ax.spines["left"].set_bounds(0, 1.5)
-    ax.set_ylabel("logit-difference gap remaining\n(fraction of baseline)", linespacing=1.1)
+        # A: remaining answer gap after the suicide direction or a damage-matched null direction is projected out
+        fams = [("isotropic", "Isotropic"), ("pca", "Top PC"), ("sign_random", "Sign-\nrandom"),
+                ("shuffled_label", "Shuffled\nlabel")]
+        order = ["llama", "qwen", "mistral"]
+        off3 = dict(zip(order, [-0.22, 0.0, 0.22]))
+        files = {model_key(f.name): f for f in (D / "audit_klnec/suicide").glob("*.json")}
+        ax.axhline(1, color="0.5", lw=1.0, ls=":", zorder=1)
+        handles = []
+        for k in order:
+            n = load(files[k].relative_to(D))["necessary"]; km = n["kl_matched"]; base = n["baseline_ld_gap"]
+            v = km["target_ld_gap"] / base
+            ax.plot(off3[k], v, "o", ms=5, color=COLOR[k], zorder=3)
+            for i, (fk, _) in enumerate(fams):
+                draws = np.array([dd["ld_gap"] for dd in km["nulls"][fk]["draws"]]) / base
+                m = draws.mean()
+                ax.errorbar(i + 1 + off3[k], m, yerr=[[m - draws.min()], [draws.max() - m]], fmt="o", ms=5,
+                            color=COLOR[k], elinewidth=1.0, capsize=2.5, capthick=1.0, zorder=3)
+            handles.append(plt.Line2D([], [], marker="o", ms=5, ls="", color=COLOR[k],
+                                      label=f"{MODELS[k]} (KL {km['target_kl']:.2f})"))
+        ax.set_xticks(range(5), ["Suicide\ndirection"] + [f[1] for f in fams])
+        ax.set_xlim(-0.5, 4.5)
+        ax.set_ylim(0, 2.0); ax.set_yticks([0, 0.5, 1.0, 1.5, 2.0])
+        ax.set_ylabel("Remaining answer gap\n(fraction of baseline)")
+        ax.text(-0.45, 1.02, "No change", ha="left", va="bottom", fontsize=10, color="0.4")
+        ax.legend(handles=handles, loc="upper left", frameon=False, handletextpad=0.3, borderaxespad=0.2)
+        title(ax, "A", "Necessity against null directions")
 
-    order = ["llama", "mistral", "gemma", "qwen"]
-    files = {model_key(f.name): f for f in (D / "steering_topic").glob("*.json")}
-    for j, k in enumerate(order):
-        a = load(files[k].relative_to(D)); ratios = []; sui = None
-        for cname, cv in a["concepts"].items():
-            rec = next(r for r in cv["variants"]["orig"] if abs(r["kappa"] - 0.1) < 1e-9)
-            ratios.append(rec["nontopic_shift"] / rec["on_shift"])
-            if cname == "suicide":
-                sui = rec["nontopic_shift"] / rec["on_shift"]
-        ratios = np.array(ratios)
-        bx.plot(j + np.linspace(-0.14, 0.14, len(ratios)), np.clip(ratios, 0.05, None), "o", ms=2.8,
-                mfc="white", mec=CTRL, mew=0.6, zorder=2)
-        bx.plot([j - 0.24, j + 0.24], [np.median(ratios)] * 2, color=INK, lw=0.9, zorder=3)
-        bx.plot(j, sui, "D", ms=3.6, color=RED, mec="white", mew=0.4, zorder=4)
-    bx.axhline(1, color=INK2, lw=0.5, ls=(0, (3, 2)))
-    bx.set_xticks(range(len(order)))
-    bx.set_xticklabels([MODELS[k] for k in order], rotation=25, ha="right", rotation_mode="anchor")
-    bx.tick_params(axis="x", length=0)
-    bx.set_xlim(-0.6, len(order) - 0.4)
-    bx.set_yscale("log"); bx.set_ylim(0.05, 10)
-    bx.set_ylabel("shift on unrelated always-No questions\n/ shift on target", linespacing=1.1)
-    # direct labels on the data instead of a key row
-    q = order.index("qwen"); m_ = order.index("mistral")
-    bx.annotate("suicide", xy=(q + 0.05, 0.17), xytext=(q - 0.55, 0.075), fontsize=5.6, color=RED,
-                arrowprops=dict(arrowstyle="-", color=RED, lw=0.4, shrinkA=0, shrinkB=2))
-    bx.annotate("median of\n8 concepts", xy=(m_ + 0.24, 1.31), xytext=(m_ + 0.42, 5.5), fontsize=5.4,
-                color=INK2, linespacing=1.0,
-                arrowprops=dict(arrowstyle="-", color=INK2, lw=0.4, shrinkA=1, shrinkB=1))
-    bx.text(len(order) - 0.45, 1.06, "as much as\nthe target", fontsize=5.2, color=INK2, ha="right",
-            va="bottom", linespacing=1.0)
+        # B: steering at equal KL; ratio of the shift on always-"no" questions to the shift on the target question
+        order = ["llama", "qwen", "mistral", "gemma"]
+        files = {model_key(f.name): f for f in (D / "steering_topic").glob("*.json")}
+        for j, k in enumerate(order):
+            a = load(files[k].relative_to(D)); ratios = []; sui = None
+            for cname, cv in a["concepts"].items():
+                rec = next(r for r in cv["variants"]["orig"] if abs(r["kappa"] - 0.1) < 1e-9)
+                ratios.append(rec["nontopic_shift"] / rec["on_shift"])
+                if cname == "suicide":
+                    sui = ratios[-1]
+            others = [r for r, c in zip(ratios, a["concepts"]) if c != "suicide"]
+            bx.plot(j + np.linspace(-0.15, 0.15, len(others)), others, "o", ms=5, mfc="white", mec="0.5",
+                    mew=1.0, ls="", zorder=2)
+            bx.plot([j - 0.28, j + 0.28], [np.median(ratios)] * 2, color="black", lw=1.5, zorder=3)
+            bx.plot(j, sui, "o", ms=6, color=COLOR[k], zorder=4)
+        bx.axhline(1, color="0.5", lw=1.0, ls=":", zorder=1)
+        bx.set_yscale("log"); bx.set_ylim(0.05, 100)
+        bx.set_yticks([0.1, 1, 10], ["0.1", "1", "10"])
+        bx.set_xticks(range(len(order)), [MODELS[k] for k in order], rotation=30, ha="right",
+                      rotation_mode="anchor")
+        bx.set_xlim(-0.6, len(order) - 0.4)
+        bx.set_ylabel("Off-target shift / target shift")
+        h = [plt.Line2D([], [], marker="o", ms=6, ls="", color="0.3", label="Suicide"),
+             plt.Line2D([], [], marker="o", ms=5, ls="", mfc="white", mec="0.5", mew=1.0, label="Other concepts"),
+             plt.Line2D([], [], color="black", lw=1.5, label="Median")]
+        bx.legend(handles=h, loc="upper left", frameon=False, handletextpad=0.3, borderaxespad=0.2)
+        title(bx, "B", "Steering at equal KL")
 
-    panel(fig, ax, "A")
-    panel(fig, bx, "B", "steering, equal KL (0.1)")
-    panel(fig, cx, "C", "off-target necessity")
-    save(fig, "fig5_mechanism")
+        # C: off-target necessity; AUC of the suicide task and mean AUC of four unrelated tasks
+        other = ["sentiment", "toxicity", "sports", "truth"]
+        conds = [("none", None, "No\nablation"), ("suicide", "all", "Suicide\ndirection,\nevery layer"),
+                 ("suicide", "upper", "Suicide\ndirection,\nupper half"),
+                 ("others", "upper", "Unrelated tasks'\ndirections,\nupper half (lowest)"),
+                 ("answer_polarity", "upper", "Answer\npolarity,\nupper half")]
+        files = {model_key(f.name): f for f in (D / "offtarget_necessity").glob("*.json")}
+        cx.axhline(0.5, color="0.5", lw=1.0, ls=":", zorder=1)
+        for k in order:
+            a = load(files[k].relative_to(D))
+            for i, (d, scope, _) in enumerate(conds):
+                x = i + OFFSET[k]
+                if d == "none":
+                    s, o = a["baseline"]["suicide"]["auc"], np.mean([a["baseline"][t]["auc"] for t in other])
+                elif d == "others":
+                    s = min(a["ablations"][f"{t}|{scope}"]["tasks"]["suicide"]["auc"] for t in other); o = None
+                else:
+                    r = a["ablations"][f"{d}|{scope}"]["tasks"]
+                    s, o = r["suicide"]["auc"], np.mean([r[t]["auc"] for t in other])
+                cx.plot(x, s, "o", ms=6, color=COLOR[k], zorder=4)
+                if o is not None:
+                    cx.plot(x, o, "o", ms=6, mfc="white", mec=COLOR[k], mew=1.2, zorder=3)
+        cx.set_xticks(range(len(conds)), [c[2] for c in conds])
+        cx.set_xlim(-0.5, len(conds) - 0.5)
+        cx.set_ylim(0.15, 1.02); cx.set_yticks([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+        cx.set_ylabel("AUC after the edit")
+        cx.text(-0.45, 0.505, "Chance", ha="left", va="bottom", fontsize=10, color="0.4")
+        h = [plt.Line2D([], [], marker="o", ms=6, ls="", color=COLOR[k], label=MODELS[k]) for k in order]
+        h += [plt.Line2D([], [], marker="o", ms=6, ls="", color="0.3", label="Suicide task"),
+              plt.Line2D([], [], marker="o", ms=6, ls="", mfc="white", mec="0.3", mew=1.2,
+                         label="Unrelated tasks (mean)")]
+        cx.legend(handles=h, loc="lower left", ncol=3, frameon=False, handletextpad=0.3, columnspacing=1.2,
+                  borderaxespad=0.2)
+        title(cx, "C", "Off-target necessity")
+        save_plain(fig, "fig5_mechanism")
 
 
 def fig_offtarget(cx):

@@ -15,7 +15,7 @@ NAMES = {"llama": "Llama-3.1-8B", "qwen": "Qwen2.5-7B", "mistral": "Mistral-7B",
 def load(p): return json.load(open(p, encoding="utf8"))
 def key(n): return next(k for k in NAMES if k in n.lower())
 def f3(x): return "--" if x is None else f"{x:.3f}"
-def num(x): return f"{x:.3f}".replace("-", "$-$")
+def num(x): return (f"{x:.4f}" if 0 < abs(x) < 0.0005 else f"{x:.3f}").replace("-", "$-$")
 def ci(c): return "--" if c is None else f"{num(c[0])} to {num(c[1])}"
 
 
@@ -131,7 +131,7 @@ def necessity():
         rows.append(["", f"baseline gap {base:.2f}; {verdict}", "", "", "", "", ""])
     table("necessity", "Necessity against damage-matched nulls (direction fit on Suicide-Watch-232K unless marked "
           "register-matched).",
-          ["Model", "Direction", "KL", "$\\beta$", "Remaining gap, mean (share)", "Smallest", "Draws $\\le$ target"],
+          ["Model", "Direction", "KL", "$\\beta$", "Gap left, mean (share)", "Smallest", "Draws $\\le$ target"],
           rows, "llccccc")
     table("necessity_auc", "Answer AUC on the held-out necessity posts before and after projecting the direction out of "
           "every layer: zero projection (as in the main text) and mean projection, with the KL divergence of each edit.",
@@ -328,13 +328,14 @@ def offtarget():
 
 def benchmark():
     a = load(D / "audit/suicide/llama_3_1_8b_instruct__seed0.json"); g, d = a["gate"], a["decodable"]
-    nz = a["necessary"]["modes"]["zero"]
+    # ablation AUC from the KL-matched necessity run, as in the main text and Table necessity_auc
+    k = load(D / "audit_klnec/suicide/meta_llama_3_1_8b_instruct__seed0.json")["necessary"]; nz = k["modes"]["zero"]
     rows = [["Model answer", f3(g["behavioral_auc"]), ci(g["behavioral_ci95"])],
             ["TF-IDF", f3(g["tfidf_auc"]), ci(g["tfidf_ci95"])],
             ["Answer $-$ TF-IDF", "--", ci(g["behavior_minus_tfidf_ci95"])],
             [f"Probe, layer {d['site']}", f3(d["site_auc"]), "--"],
             ["Probe $-$ TF-IDF", "--", ci(d["probe_minus_tfidf_ci95"])],
-            ["Answer after ablating the direction", f3(nz["ablated_auc"]), f"baseline {a['necessary']['baseline_auc']:.3f}"]]
+            ["Answer after ablating the direction", f3(nz["ablated_auc"]), f"baseline {k['baseline_auc']:.3f}"]]
     table("benchmark", "Suicide-Watch-232K, Llama-3.1-8B.", ["Readout", "AUC", "95\\% CI / note"], rows, "lcc")
 
 
